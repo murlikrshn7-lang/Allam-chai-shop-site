@@ -17,7 +17,7 @@
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold tracking-wide flex items-center gap-2">
-                    <i class="fa-solid font-bold fa-mug-hot text-amber-400"></i> Allam Chai
+                    <i class="fa-solid fa-mug-hot text-amber-400"></i> Allam Chai
                 </h1>
                 <p class="text-xs text-amber-200">Serving Warmth For 30+ Years • Fresh & Pure</p>
             </div>
@@ -32,11 +32,19 @@
         <span class="inline-block badge-legacy text-white text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
             Legacy Brand
         </span>
-        <p class="text-xs text-amber-900 font-medium">Delivering quality teas, fresh dairy, and chilled beverages right to your doorstep via <strong>Porter.in</strong>.</p>
+        <p class="text-xs text-amber-900 font-medium">Delivering hot brews, fresh dairy, and chilled beverages right to your door or available for instant store pickup.</p>
     </section>
 
     <!-- Store Menu -->
     <main class="max-w-4xl mx-auto px-4 mt-6 space-y-8">
+
+        <!-- Hot Teas Section (Top Priority) -->
+        <section>
+            <h2 class="text-xl font-bold text-amber-900 border-b-2 border-amber-800 pb-1 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-fire text-amber-600"></i> Fresh Hot Teas (Order by People Count)
+            </h2>
+            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </section>
 
         <!-- Beverages Section -->
         <section>
@@ -59,7 +67,7 @@
             <h3 class="text-lg font-bold text-amber-300 mb-2 flex items-center gap-2">
                 <i class="fa-solid fa-champagne-glasses"></i> Bulk & Party Orders
             </h3>
-            <p class="text-xs text-amber-100 mb-4">Planning an event, office meeting, or family gathering? Place bulk catering orders directly with us for fresh Allam Chai and bulk dairy/beverage supplies.</p>
+            <p class="text-xs text-amber-100 mb-4">Planning an event, office meeting, or family gathering? Place bulk catering orders directly with us for fresh Allam Chai and bulk supplies.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <input type="text" id="party-name" placeholder="Your Name" class="p-2 rounded text-xs text-slate-800 outline-none">
                 <input type="tel" id="party-phone" placeholder="Phone Number" class="p-2 rounded text-xs text-slate-800 outline-none">
@@ -93,9 +101,24 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <h3 class="text-lg font-bold text-slate-800 mb-1">Complete Your Order</h3>
-            <p class="text-xs text-slate-500 mb-4">Fast local delivery dispatched via <strong>Porter.in</strong></p>
+            <p class="text-xs text-slate-500 mb-4">Choose delivery or pickup below</p>
 
             <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
+                <!-- Delivery Mode Selection -->
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">Fulfillment Method</label>
+                    <div class="grid grid-cols-2 gap-2 mt-1">
+                        <label class="border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300" id="label-delivery">
+                            <input type="radio" name="fulfillment" value="Delivery" checked onclick="toggleFulfillment('Delivery')" class="accent-amber-800">
+                            <span class="text-xs font-bold text-amber-900">Delivery (Porter)</span>
+                        </label>
+                        <label class="border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200" id="label-pickup">
+                            <input type="radio" name="fulfillment" value="Store Pickup" onclick="toggleFulfillment('Store Pickup')" class="accent-amber-800">
+                            <span class="text-xs font-bold text-slate-700">Store Pickup</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div>
                     <label class="text-xs font-semibold text-slate-600">Full Name</label>
                     <input type="text" id="cust-name" required class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600">
@@ -104,7 +127,7 @@
                     <label class="text-xs font-semibold text-slate-600">Phone Number</label>
                     <input type="tel" id="cust-phone" required class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600">
                 </div>
-                <div>
+                <div id="address-container">
                     <label class="text-xs font-semibold text-slate-600">Delivery Address</label>
                     <textarea id="cust-address" required rows="2" class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600"></textarea>
                 </div>
@@ -128,6 +151,10 @@
         const STORE_WHATSAPP = "919676222557";
 
         const products = [
+            // Fresh Teas (Priced per person)
+            { id: 101, category: 'tea', name: 'Special Fresh Allam Chai', size: 'Price per Person', price: 15 },
+            { id: 102, category: 'tea', name: 'Classic Masala Tea', size: 'Price per Person', price: 15 },
+            
             // Beverages
             { id: 1, category: 'beverages', name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20 },
             { id: 2, category: 'beverages', name: 'Kinley Strong Soda', size: '750 ml', price: 20 },
@@ -152,18 +179,21 @@
         ];
 
         let cart = {};
+        let selectedFulfillment = 'Delivery';
 
         function renderMenu() {
+            const teaGrid = document.getElementById('tea-grid');
             const bevGrid = document.getElementById('beverages-grid');
             const dairyGrid = document.getElementById('dairy-grid');
 
             products.forEach(p => {
+                const labelText = p.category === 'tea' ? 'People / Servings' : p.size;
                 const card = `
                     <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex justify-between items-center">
                         <div>
                             <h4 class="font-bold text-xs text-slate-800">${p.name}</h4>
-                            <p class="text-[11px] text-slate-500">${p.size}</p>
-                            <p class="text-xs font-semibold text-amber-900 mt-1">₹${p.price}</p>
+                            <p class="text-[11px] text-amber-700 font-medium">${labelText}</p>
+                            <p class="text-xs font-semibold text-amber-900 mt-1">₹${p.price} / person</p>
                         </div>
                         <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg p-1">
                             <button onclick="updateCart(${p.id}, -1)" class="w-6 h-6 bg-white shadow rounded font-bold text-xs text-amber-900 flex items-center justify-center">-</button>
@@ -172,7 +202,8 @@
                         </div>
                     </div>
                 `;
-                if (p.category === 'beverages') bevGrid.innerHTML += card;
+                if (p.category === 'tea') teaGrid.innerHTML += card;
+                else if (p.category === 'beverages') bevGrid.innerHTML += card;
                 else dairyGrid.innerHTML += card;
             });
         }
@@ -195,9 +226,27 @@
             return total;
         }
 
+        function toggleFulfillment(type) {
+            selectedFulfillment = type;
+            const addrContainer = document.getElementById('address-container');
+            const addrInput = document.getElementById('cust-address');
+
+            if (type === 'Store Pickup') {
+                addrContainer.classList.add('hidden');
+                addrInput.removeAttribute('required');
+                document.getElementById('label-pickup').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
+                document.getElementById('label-delivery').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
+            } else {
+                addrContainer.classList.remove('hidden');
+                addrInput.setAttribute('required', 'true');
+                document.getElementById('label-delivery').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
+                document.getElementById('label-pickup').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
+            }
+        }
+
         function openCheckoutModal() {
             if (Object.keys(cart).length === 0) {
-                alert('Please add items to your cart before proceeding.');
+                alert('Please add items or tea servings before proceeding.');
                 return;
             }
             document.getElementById('checkout-modal').classList.remove('hidden');
@@ -211,30 +260,28 @@
             e.preventDefault();
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
-            const address = document.getElementById('cust-address').value;
+            const address = selectedFulfillment === 'Delivery' ? document.getElementById('cust-address').value : 'N/A (Store Pickup)';
             const total = calculateTotal();
 
-            // Construct WhatsApp Order Message
             let itemsList = '';
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
-                itemsList += `• ${prod.name} (${prod.size}) x ${cart[id]} = ₹${prod.price * cart[id]}\n`;
+                const countUnit = prod.category === 'tea' ? 'People' : 'Pcs';
+                itemsList += `• ${prod.name} (${cart[id]} ${countUnit}) = ₹${prod.price * cart[id]}\n`;
             });
 
             const text = `*NEW ORDER - ALLAM CHAI*\n\n` +
+                         `*Order Type:* ${selectedFulfillment}\n` +
                          `*Customer:* ${name}\n` +
                          `*Phone:* ${phone}\n` +
-                         `*Delivery Address:* ${address}\n\n` +
-                         `*Order Summary:*\n${itemsList}\n` +
+                         (selectedFulfillment === 'Delivery' ? `*Delivery Address:* ${address}\n` : `*Pickup:* Self Pickup at Counter\n`) +
+                         `\n*Order Items:*\n${itemsList}\n` +
                          `*Total Amount:* ₹${total}\n` +
-                         `*Payment:* PhonePe UPI (Pending/Completed)\n` +
-                         `*Logistics:* Dispatch via Porter.in`;
+                         `*Payment:* PhonePe UPI (Pending/Completed)`;
 
-            // Open PhonePe Payment Link (UPI intent)
             const phonePeUri = `upi://pay?pa=${STORE_WHATSAPP}@ybl&pn=AllamChai&am=${total}&cu=INR`;
             window.location.href = phonePeUri;
 
-            // Direct order confirmation to WhatsApp business number
             setTimeout(() => {
                 const waUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
                 window.open(waUrl, '_blank');
