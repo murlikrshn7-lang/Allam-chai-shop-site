@@ -38,7 +38,7 @@
     <!-- Store Menu -->
     <main class="max-w-4xl mx-auto px-4 mt-6 space-y-8">
 
-        <!-- Hot Teas Section (Top Priority) -->
+        <!-- Hot Teas Section -->
         <section>
             <h2 class="text-xl font-bold text-amber-900 border-b-2 border-amber-800 pb-1 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-fire text-amber-600"></i> Fresh Hot Teas (Order by People Count)
@@ -104,7 +104,7 @@
             <p class="text-xs text-slate-500 mb-4">Choose delivery or pickup below</p>
 
             <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
-                <!-- Delivery Mode Selection -->
+                <!-- Fulfillment Method -->
                 <div>
                     <label class="text-xs font-semibold text-slate-600">Fulfillment Method</label>
                     <div class="grid grid-cols-2 gap-2 mt-1">
@@ -152,9 +152,10 @@
 
         const products = [
             // Fresh Teas (Priced per person)
-            { id: 101, category: 'tea', name: 'Special Fresh Allam Chai', size: 'Price per Person', price: 15 },
+            { id: 101, category: 'tea', name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15 },
+            { id: 102, category: 'tea', name: 'Classic Masala Tea', size: 'Select Number of People', price: 15 },
             
-            // Beverages
+            // Beverages (Standard pricing)
             { id: 1, category: 'beverages', name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20 },
             { id: 2, category: 'beverages', name: 'Kinley Strong Soda', size: '750 ml', price: 20 },
             { id: 3, category: 'beverages', name: 'Sting Energy Drink', size: '250 ml', price: 20 },
@@ -168,7 +169,7 @@
             { id: 11, category: 'beverages', name: 'Maaza Mango Drink', size: '600 ml / 750 ml', price: 40 },
             { id: 12, category: 'beverages', name: 'Maaza Mango Drink', size: '1.25 L / 1.5 L', price: 75 },
             
-            // Dairy
+            // Dairy (Standard pricing)
             { id: 13, category: 'dairy', name: 'Nandini / Heritage Milk Pouch (Toned/Full)', size: '500 ml', price: 28 },
             { id: 14, category: 'dairy', name: 'Heritage Curd Pouch', size: '200g', price: 20 },
             { id: 15, category: 'dairy', name: 'Heritage Curd Pouch', size: '500g', price: 35 },
@@ -186,13 +187,15 @@
             const dairyGrid = document.getElementById('dairy-grid');
 
             products.forEach(p => {
-                const labelText = p.category === 'tea' ? 'People / Servings' : p.size;
+                const isTea = p.category === 'tea';
+                const priceDisplay = isTea ? `₹${p.price} / person` : `₹${p.price}`;
+
                 const card = `
                     <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex justify-between items-center">
                         <div>
                             <h4 class="font-bold text-xs text-slate-800">${p.name}</h4>
-                            <p class="text-[11px] text-amber-700 font-medium">${labelText}</p>
-                            <p class="text-xs font-semibold text-amber-900 mt-1">₹${p.price} / person</p>
+                            <p class="text-[11px] ${isTea ? 'text-amber-700 font-medium' : 'text-slate-500'}">${p.size}</p>
+                            <p class="text-xs font-semibold text-amber-900 mt-1">${priceDisplay}</p>
                         </div>
                         <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg p-1">
                             <button onclick="updateCart(${p.id}, -1)" class="w-6 h-6 bg-white shadow rounded font-bold text-xs text-amber-900 flex items-center justify-center">-</button>
@@ -201,7 +204,7 @@
                         </div>
                     </div>
                 `;
-                if (p.category === 'tea') teaGrid.innerHTML += card;
+                if (isTea) teaGrid.innerHTML += card;
                 else if (p.category === 'beverages') bevGrid.innerHTML += card;
                 else dairyGrid.innerHTML += card;
             });
