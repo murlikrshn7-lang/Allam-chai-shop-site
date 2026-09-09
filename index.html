@@ -3,116 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allam Chai | Express Delivery & Party Orders</title>
+    <title>Allam Chai | Express Delivery & Party Catering</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .badge-legacy { background: linear-gradient(135deg, #d97706, #b45309); }
+        .product-img { object-fit: cover; aspect-ratio: 1/1; }
     </style>
 </head>
-<body class="bg-amber-50 text-slate-800 font-sans pb-24">
+<body class="bg-amber-50/50 text-slate-800 font-sans pb-28">
 
     <!-- Header & Hero -->
     <header class="bg-amber-900 text-white sticky top-0 z-50 shadow-md">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold tracking-wide flex items-center gap-2">
-                    <i class="fa-solid fa-mug-hot text-amber-400"></i> Allam Chai
-                </h1>
-                <p class="text-xs text-amber-200">Serving Warmth For 30+ Years • Fresh & Pure</p>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-amber-950 font-bold text-lg shadow-md">
+                    ☕
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide flex items-center gap-1.5">
+                        Allam Chai
+                    </h1>
+                    <p class="text-[11px] text-amber-200">Serving Fresh Brews Since 1994 • Pure & Fresh</p>
+                </div>
             </div>
-            <a href="#party-orders" class="bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition">
+            <a href="#party-orders" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition">
                 🎉 Party Orders
             </a>
         </div>
     </header>
 
-    <!-- Legacy Banner -->
+    <!-- Legacy & Quality Banner -->
     <section class="bg-amber-100 border-b border-amber-200 py-3 text-center px-4">
-        <span class="inline-block badge-legacy text-white text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
-            Legacy Brand
+        <span class="inline-block badge-legacy text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
+            Premium Quality Guaranteed
         </span>
-        <p class="text-xs text-amber-900 font-medium">Delivering hot brews, fresh dairy, and chilled beverages right to your door or available for instant store pickup.</p>
+        <p class="text-xs text-amber-900 font-medium">Authentic Allam Chai, fresh Heritage dairy, and chilled beverages delivered instantly or available for quick store pickup.</p>
     </section>
 
-    <!-- Store Menu -->
+    <!-- Main Content Container -->
     <main class="max-w-4xl mx-auto px-4 mt-6 space-y-8">
 
         <!-- Hot Teas Section -->
         <section>
-            <h2 class="text-xl font-bold text-amber-900 border-b-2 border-amber-800 pb-1 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-fire text-amber-600"></i> Fresh Hot Teas (Order by People Count)
-            </h2>
-            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            <div class="flex justify-between items-end border-b-2 border-amber-800 pb-2 mb-4">
+                <h2 class="text-lg font-bold text-amber-900 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-600"></i> Fresh Hot Teas
+                </h2>
+                <span class="text-[11px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-semibold">Min. 2 Persons / Order</span>
+            </div>
+            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- Beverages Section -->
         <section>
-            <h2 class="text-xl font-bold text-amber-900 border-b-2 border-amber-800 pb-1 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-bottle-water text-amber-700"></i> Packaged Carbonated Soft Drinks & Juices
+            <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-bottle-water text-amber-700"></i> Packaged Beverages & Juices
             </h2>
-            <div id="beverages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            <div id="beverages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- Dairy Section -->
         <section>
-            <h2 class="text-xl font-bold text-amber-900 border-b-2 border-amber-800 pb-1 mb-4 flex items-center gap-2">
+            <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-cow text-amber-700"></i> Dairy Products (Heritage & Nandini)
             </h2>
-            <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- Party Orders Section -->
-        <section id="party-orders" class="bg-amber-900 text-white rounded-xl p-5 shadow-lg border border-amber-700">
-            <h3 class="text-lg font-bold text-amber-300 mb-2 flex items-center gap-2">
-                <i class="fa-solid fa-champagne-glasses"></i> Bulk & Party Orders
+        <section id="party-orders" class="bg-amber-900 text-white rounded-2xl p-6 shadow-xl border border-amber-700">
+            <h3 class="text-lg font-bold text-amber-300 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-champagne-glasses"></i> Bulk & Party Catering Inquiry
             </h3>
-            <p class="text-xs text-amber-100 mb-4">Planning an event, office meeting, or family gathering? Place bulk catering orders directly with us for fresh Allam Chai and bulk supplies.</p>
+            <p class="text-xs text-amber-100 mb-4">Planning an office meeting, family event, or private gathering? Contact us directly for bulk flask deliveries and catering setups.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <input type="text" id="party-name" placeholder="Your Name" class="p-2 rounded text-xs text-slate-800 outline-none">
-                <input type="tel" id="party-phone" placeholder="Phone Number" class="p-2 rounded text-xs text-slate-800 outline-none">
-                <input type="date" id="party-date" class="p-2 rounded text-xs text-slate-800 outline-none">
-                <input type="text" id="party-guests" placeholder="Estimated Guests / Requirement" class="p-2 rounded text-xs text-slate-800 outline-none">
+                <input type="text" id="party-name" placeholder="Your Name" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
+                <input type="tel" id="party-phone" placeholder="Phone Number" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
+                <input type="date" id="party-date" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
+                <input type="text" id="party-guests" placeholder="Estimated Guests / Order Details" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
             </div>
-            <button onclick="submitPartyOrder()" class="mt-4 w-full bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold py-2 rounded-lg text-xs uppercase tracking-wider transition">
-                Inquire Party Order on WhatsApp
+            <button onclick="submitPartyOrder()" class="mt-4 w-full bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-base"></i> Inquire Party Order on WhatsApp
             </button>
         </section>
 
+        <!-- Physical Store & Location Footer -->
+        <footer class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+            <h3 class="text-sm font-bold text-amber-900 border-b pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-store text-amber-700"></i> Store Location & Operating Hours
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="space-y-2">
+                    <p class="font-semibold text-slate-800 flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-amber-700 mt-0.5"></i>
+                        <span><strong>Allam Chai Main Branch</strong><br>Lalapet Main Road, Near Ram Theater,<br>Lalapet, Hyderabad / Secunderabad - 500017</span>
+                    </p>
+                    <p class="text-slate-600 flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-amber-700"></i> Open Daily: 5:30 AM – 10:30 PM
+                    </p>
+                    <p class="text-slate-600 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-700"></i> +91 96762 22557
+                    </p>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-200 h-32 bg-slate-100">
+                    <iframe 
+                        title="Store Location"
+                        class="w-full h-full border-0" 
+                        loading="lazy" 
+                        src="https://maps.google.com/maps?q=Lalapet%20Main%20Road,%20Hyderabad&t=&z=14&ie=UTF8&iwloc=&output=embed">
+                    </iframe>
+                </div>
+            </div>
+        </footer>
+
     </main>
 
-    <!-- Cart Bar -->
+    <!-- Bottom Sticky Cart Bar -->
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-2xl p-4 z-40">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             <div>
-                <p class="text-xs text-slate-500">Total Amount</p>
+                <p class="text-xs text-slate-500">Order Subtotal</p>
                 <p id="total-price" class="text-xl font-bold text-slate-800">₹0</p>
             </div>
             <button onclick="openCheckoutModal()" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-lg transition">
-                <span>Buy Now</span> <i class="fa-solid fa-arrow-right"></i>
+                <span>Proceed to Checkout</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
     </div>
 
     <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-lg font-bold text-slate-800 mb-1">Complete Your Order</h3>
-            <p class="text-xs text-slate-500 mb-4">Choose delivery or pickup below</p>
+            <h3 class="text-lg font-bold text-slate-800">Complete Your Order</h3>
+            <p class="text-xs text-slate-500 mb-3">Review items and select fulfillment type</p>
+
+            <!-- Order Summary Inside Modal -->
+            <div id="modal-cart-summary" class="bg-slate-50 border rounded-xl p-3 mb-4 space-y-1 text-xs"></div>
 
             <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
                 <!-- Fulfillment Method -->
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">Fulfillment Method</label>
+                    <label class="text-xs font-semibold text-slate-600">Fulfillment Options</label>
                     <div class="grid grid-cols-2 gap-2 mt-1">
-                        <label class="border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300" id="label-delivery">
+                        <label class="border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300" id="label-delivery">
                             <input type="radio" name="fulfillment" value="Delivery" checked onclick="toggleFulfillment('Delivery')" class="accent-amber-800">
-                            <span class="text-xs font-bold text-amber-900">Delivery (Porter)</span>
+                            <span class="text-xs font-bold text-amber-900">Express Delivery</span>
                         </label>
-                        <label class="border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200" id="label-pickup">
+                        <label class="border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200" id="label-pickup">
                             <input type="radio" name="fulfillment" value="Store Pickup" onclick="toggleFulfillment('Store Pickup')" class="accent-amber-800">
                             <span class="text-xs font-bold text-slate-700">Store Pickup</span>
                         </label>
@@ -129,19 +170,19 @@
                 </div>
                 <div id="address-container">
                     <label class="text-xs font-semibold text-slate-600">Delivery Address</label>
-                    <textarea id="cust-address" required rows="2" class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600"></textarea>
+                    <textarea id="cust-address" required rows="2" placeholder="House no, Street, Landmark..." class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600"></textarea>
                 </div>
                 
-                <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
-                    <p class="text-xs font-medium text-amber-900">Payment Option</p>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                    <p class="text-xs font-medium text-amber-900">Payment Channel</p>
                     <div class="flex items-center gap-2 mt-1">
-                        <i class="fa-solid fa-mobile-screen-button text-purple-700"></i>
-                        <span class="text-xs font-bold text-purple-900">PhonePe UPI / QR</span>
+                        <i class="fa-solid fa-qrcode text-purple-700"></i>
+                        <span class="text-xs font-bold text-purple-900">Instant UPI Payment (PhonePe / GPay)</span>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2">
-                    Pay with PhonePe & Place Order
+                <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock text-xs"></i> Pay & Dispatch Order
                 </button>
             </form>
         </div>
@@ -151,30 +192,31 @@
         const STORE_WHATSAPP = "919676222557";
 
         const products = [
-            // Fresh Teas (Priced per person)
-            { id: 101, category: 'tea', name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15 },
+            // Fresh Teas (Min quantity rule = 2)
+            { id: 101, category: 'tea', minQty: 2, name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=150&q=80' },
+            { id: 102, category: 'tea', minQty: 2, name: 'Classic Masala Tea', size: 'Select Number of People', price: 15, img: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=150&q=80' },
             
-            // Beverages (Standard pricing)
-            { id: 1, category: 'beverages', name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20 },
-            { id: 2, category: 'beverages', name: 'Kinley Strong Soda', size: '750 ml', price: 20 },
-            { id: 3, category: 'beverages', name: 'Sting Energy Drink', size: '250 ml', price: 20 },
-            { id: 4, category: 'beverages', name: 'Mountain Dew / Dew Neon', size: '250 ml / 400 ml', price: 20 },
-            { id: 5, category: 'beverages', name: 'Mountain Dew', size: '750 ml', price: 40 },
-            { id: 6, category: 'beverages', name: 'Thums Up', size: '750 ml', price: 40 },
-            { id: 7, category: 'beverages', name: 'Thums Up', size: '2.25 Litres', price: 90 },
-            { id: 8, category: 'beverages', name: 'Sprite', size: '750 ml', price: 40 },
-            { id: 9, category: 'beverages', name: 'Sprite', size: '2.25 Litres', price: 90 },
-            { id: 10, category: 'beverages', name: 'Maaza Mango Drink', size: '250 ml / 400 ml', price: 25 },
-            { id: 11, category: 'beverages', name: 'Maaza Mango Drink', size: '600 ml / 750 ml', price: 40 },
-            { id: 12, category: 'beverages', name: 'Maaza Mango Drink', size: '1.25 L / 1.5 L', price: 75 },
+            // Beverages
+            { id: 1, category: 'beverages', minQty: 1, name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20, img: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=150&q=80' },
+            { id: 2, category: 'beverages', minQty: 1, name: 'Kinley Strong Soda', size: '750 ml', price: 20, img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=150&q=80' },
+            { id: 3, category: 'beverages', minQty: 1, name: 'Sting Energy Drink', size: '250 ml', price: 20, img: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=150&q=80' },
+            { id: 4, category: 'beverages', minQty: 1, name: 'Mountain Dew', size: '250 ml / 400 ml', price: 20, img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=150&q=80' },
+            { id: 5, category: 'beverages', minQty: 1, name: 'Mountain Dew', size: '750 ml', price: 40, img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=150&q=80' },
+            { id: 6, category: 'beverages', minQty: 1, name: 'Thums Up', size: '750 ml', price: 40, img: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=150&q=80' },
+            { id: 7, category: 'beverages', minQty: 1, name: 'Thums Up', size: '2.25 Litres', price: 90, img: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=150&q=80' },
+            { id: 8, category: 'beverages', minQty: 1, name: 'Sprite', size: '750 ml', price: 40, img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=150&q=80' },
+            { id: 9, category: 'beverages', minQty: 1, name: 'Sprite', size: '2.25 Litres', price: 90, img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=150&q=80' },
+            { id: 10, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '250 ml / 400 ml', price: 25, img: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=150&q=80' },
+            { id: 11, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '600 ml / 750 ml', price: 40, img: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=150&q=80' },
+            { id: 12, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '1.25 L / 1.5 L', price: 75, img: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=150&q=80' },
             
-            // Dairy (Standard pricing)
-            { id: 13, category: 'dairy', name: 'Nandini / Heritage Milk Pouch (Toned/Full)', size: '500 ml', price: 28 },
-            { id: 14, category: 'dairy', name: 'Heritage Curd Pouch', size: '200g', price: 20 },
-            { id: 15, category: 'dairy', name: 'Heritage Curd Pouch', size: '500g', price: 35 },
-            { id: 16, category: 'dairy', name: 'Heritage Total Curd Container', size: '450g', price: 55 },
-            { id: 17, category: 'dairy', name: 'Heritage Total Curd Container', size: '1 kg', price: 100 },
-            { id: 18, category: 'dairy', name: 'Heritage Fresh Paneer', size: '200g', price: 100 }
+            // Dairy
+            { id: 13, category: 'dairy', minQty: 1, name: 'Nandini / Heritage Milk Pouch', size: '500 ml', price: 28, img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=150&q=80' },
+            { id: 14, category: 'dairy', minQty: 1, name: 'Heritage Curd Pouch', size: '200g', price: 20, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
+            { id: 15, category: 'dairy', minQty: 1, name: 'Heritage Curd Pouch', size: '500g', price: 35, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
+            { id: 16, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '450g', price: 55, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
+            { id: 17, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '1 kg', price: 100, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
+            { id: 18, category: 'dairy', minQty: 1, name: 'Heritage Fresh Paneer', size: '200g', price: 100, img: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=150&q=80' }
         ];
 
         let cart = {};
@@ -190,16 +232,17 @@
                 const priceDisplay = isTea ? `₹${p.price} / person` : `₹${p.price}`;
 
                 const card = `
-                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex justify-between items-center">
-                        <div>
-                            <h4 class="font-bold text-xs text-slate-800">${p.name}</h4>
-                            <p class="text-[11px] ${isTea ? 'text-amber-700 font-medium' : 'text-slate-500'}">${p.size}</p>
-                            <p class="text-xs font-semibold text-amber-900 mt-1">${priceDisplay}</p>
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 hover:shadow-md transition">
+                        <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
+                            <p class="text-[11px] ${isTea ? 'text-amber-800 font-medium' : 'text-slate-500'}">${p.size}</p>
+                            <p class="text-xs font-bold text-amber-900 mt-1">${priceDisplay}</p>
                         </div>
-                        <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg p-1">
-                            <button onclick="updateCart(${p.id}, -1)" class="w-6 h-6 bg-white shadow rounded font-bold text-xs text-amber-900 flex items-center justify-center">-</button>
-                            <span id="qty-${p.id}" class="text-xs font-bold text-slate-700 min-w-[12px] text-center">0</span>
-                            <button onclick="updateCart(${p.id}, 1)" class="w-6 h-6 bg-amber-800 text-white shadow rounded font-bold text-xs flex items-center justify-center">+</button>
+                        <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-1">
+                            <button onclick="updateCart(${p.id}, -1)" class="w-7 h-7 bg-white shadow-sm rounded-lg font-bold text-xs text-amber-900 flex items-center justify-center hover:bg-slate-50">-</button>
+                            <span id="qty-${p.id}" class="text-xs font-bold text-slate-800 min-w-[14px] text-center">0</span>
+                            <button onclick="updateCart(${p.id}, 1)" class="w-7 h-7 bg-amber-800 text-white shadow-sm rounded-lg font-bold text-xs flex items-center justify-center hover:bg-amber-900">+</button>
                         </div>
                     </div>
                 `;
@@ -210,9 +253,20 @@
         }
 
         function updateCart(id, change) {
-            cart[id] = (cart[id] || 0) + change;
-            if (cart[id] <= 0) delete cart[id];
-            
+            const prod = products.find(p => p.id == id);
+            let currentQty = cart[id] || 0;
+
+            if (change > 0 && currentQty === 0) {
+                // Enforce minimum order threshold on initial add
+                cart[id] = prod.minQty;
+            } else {
+                cart[id] = currentQty + change;
+            }
+
+            if (cart[id] < prod.minQty) {
+                delete cart[id];
+            }
+
             document.getElementById(`qty-${id}`).innerText = cart[id] || 0;
             calculateTotal();
         }
@@ -235,21 +289,44 @@
             if (type === 'Store Pickup') {
                 addrContainer.classList.add('hidden');
                 addrInput.removeAttribute('required');
-                document.getElementById('label-pickup').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
-                document.getElementById('label-delivery').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
+                document.getElementById('label-pickup').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
+                document.getElementById('label-delivery').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
             } else {
                 addrContainer.classList.remove('hidden');
                 addrInput.setAttribute('required', 'true');
-                document.getElementById('label-delivery').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
-                document.getElementById('label-pickup').className = 'border p-2 rounded-lg flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
+                document.getElementById('label-delivery').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
+                document.getElementById('label-pickup').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
             }
         }
 
         function openCheckoutModal() {
             if (Object.keys(cart).length === 0) {
-                alert('Please add items or tea servings before proceeding.');
+                alert('Your cart is empty. Please add items to proceed.');
                 return;
             }
+
+            // Populate cart summary in modal
+            const modalSummary = document.getElementById('modal-cart-summary');
+            let summaryHtml = `<p class="font-bold text-slate-700 border-b pb-1 mb-2">Order Summary</p>`;
+            
+            Object.keys(cart).forEach(id => {
+                const prod = products.find(p => p.id == id);
+                const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
+                summaryHtml += `
+                    <div class="flex justify-between items-center py-0.5">
+                        <span class="text-slate-600">${prod.name} (${cart[id]} ${unitText})</span>
+                        <span class="font-semibold text-slate-800">₹${prod.price * cart[id]}</span>
+                    </div>
+                `;
+            });
+            summaryHtml += `
+                <div class="flex justify-between items-center border-t pt-1.5 mt-1 font-bold text-amber-900">
+                    <span>Subtotal</span>
+                    <span>₹${calculateTotal()}</span>
+                </div>
+            `;
+            modalSummary.innerHTML = summaryHtml;
+
             document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
@@ -261,24 +338,27 @@
             e.preventDefault();
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
-            const address = selectedFulfillment === 'Delivery' ? document.getElementById('cust-address').value : 'N/A (Store Pickup)';
+            const address = selectedFulfillment === 'Delivery' ? document.getElementById('cust-address').value : 'Store Pickup (Counter)';
             const total = calculateTotal();
 
             let itemsList = '';
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
-                const countUnit = prod.category === 'tea' ? 'People' : 'Pcs';
-                itemsList += `• ${prod.name} (${cart[id]} ${countUnit}) = ₹${prod.price * cart[id]}\n`;
+                const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
+                itemsList += `• ${prod.name} x ${cart[id]} ${unitText} = ₹${prod.price * cart[id]}\n`;
             });
 
-            const text = `*NEW ORDER - ALLAM CHAI*\n\n` +
-                         `*Order Type:* ${selectedFulfillment}\n` +
-                         `*Customer:* ${name}\n` +
+            const text = `*NEW ONLINE ORDER - ALLAM CHAI*\n` +
+                         `-----------------------------------\n` +
+                         `*Fulfillment:* ${selectedFulfillment}\n` +
+                         `*Customer Name:* ${name}\n` +
                          `*Phone:* ${phone}\n` +
-                         (selectedFulfillment === 'Delivery' ? `*Delivery Address:* ${address}\n` : `*Pickup:* Self Pickup at Counter\n`) +
-                         `\n*Order Items:*\n${itemsList}\n` +
-                         `*Total Amount:* ₹${total}\n` +
-                         `*Payment:* PhonePe UPI (Pending/Completed)`;
+                         (selectedFulfillment === 'Delivery' ? `*Address:* ${address}\n` : `*Location:* Counter Pickup\n`) +
+                         `-----------------------------------\n` +
+                         `*Items Ordered:*\n${itemsList}` +
+                         `-----------------------------------\n` +
+                         `*Grand Total:* ₹${total}\n` +
+                         `*Payment:* PhonePe / UPI Pending`;
 
             const phonePeUri = `upi://pay?pa=${STORE_WHATSAPP}@ybl&pn=AllamChai&am=${total}&cu=INR`;
             window.location.href = phonePeUri;
@@ -296,15 +376,16 @@
             const guests = document.getElementById('party-guests').value;
 
             if (!name || !phone) {
-                alert('Please enter your name and phone number for party inquiries.');
+                alert('Please provide your name and contact phone number.');
                 return;
             }
 
-            const text = `*PARTY / BULK ORDER INQUIRY - ALLAM CHAI*\n\n` +
+            const text = `*BULK / PARTY CATERING INQUIRY*\n` +
+                         `-----------------------------------\n` +
                          `*Name:* ${name}\n` +
                          `*Phone:* ${phone}\n` +
-                         `*Event Date:* ${date}\n` +
-                         `*Requirement/Guests:* ${guests}`;
+                         `*Event Date:* ${date || 'Not specified'}\n` +
+                         `*Guest Count / Requirements:* ${guests || 'General inquiry'}`;
 
             const waUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
             window.open(waUrl, '_blank');
