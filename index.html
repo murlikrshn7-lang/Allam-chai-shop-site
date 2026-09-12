@@ -24,7 +24,7 @@
                     <h1 class="text-xl font-bold tracking-wide flex items-center gap-1.5">
                         Allam Chai
                     </h1>
-                    <p class="text-[11px] text-amber-200">30+ Years Serving Fresh Brews & Pure Dairy</p>
+                    <p class="text-[11px] text-amber-200">Keesara Branch • Serving Fresh Brews & Pure Dairy</p>
                 </div>
             </div>
             <a href="#party-orders" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition">
@@ -117,6 +117,11 @@
                     </a>
                 </div>
             </div>
+            <div class="text-center pt-2 border-t border-slate-100">
+                <a href="admin.html" class="text-[11px] text-slate-400 hover:text-amber-800 underline font-medium">
+                    Store Staff Login (Admin Portal)
+                </a>
+            </div>
         </footer>
 
     </main>
@@ -190,14 +195,15 @@
         </div>
     </div>
 
+    <!-- Store & Cart Script -->
     <script>
         const STORE_WHATSAPP = "919676222557";
 
         const products = [
-            // Fresh Tea (Single item: Allam Chai)
+            // Fresh Tea
             { id: 101, category: 'tea', minQty: 2, name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=150&q=80' },
             
-            // Beverages (Updated accurate branding URLs)
+            // Beverages
             { id: 1, category: 'beverages', minQty: 1, name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/176/401/2246/front_en.11.400.jpg' },
             { id: 2, category: 'beverages', minQty: 1, name: 'Kinley Strong Soda', size: '750 ml', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/176/402/1033/front_en.4.400.jpg' },
             { id: 3, category: 'beverages', minQty: 1, name: 'Sting Energy Drink', size: '250 ml', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/149/110/1832/front_en.14.400.jpg' },
@@ -392,5 +398,11 @@
 
         renderMenu();
     </script>
+
+    <!-- Vercel Web Analytics Official Script -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
