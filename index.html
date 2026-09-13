@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <!-- Legacy & Quality Banner -->
+    <!-- Banner -->
     <section class="bg-amber-100 border-b border-amber-200 py-3 text-center px-4">
         <span class="inline-block badge-legacy text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
             Premium Quality Guaranteed
@@ -148,11 +148,9 @@
             <h3 class="text-lg font-bold text-slate-800">Complete Your Order</h3>
             <p class="text-xs text-slate-500 mb-3">Review items and select fulfillment type</p>
 
-            <!-- Order Summary Inside Modal -->
             <div id="modal-cart-summary" class="bg-slate-50 border rounded-xl p-3 mb-4 space-y-1 text-xs"></div>
 
             <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
-                <!-- Fulfillment Method -->
                 <div>
                     <label class="text-xs font-semibold text-slate-600">Fulfillment Options</label>
                     <div class="grid grid-cols-2 gap-2 mt-1">
@@ -195,135 +193,90 @@
         </div>
     </div>
 
-    <!-- Store & Cart Script -->
+    <!-- Script Section -->
     <script>
         const STORE_WHATSAPP = "919676222557";
         const PHONEPE_UPI_ID = "9676222557@ybl";
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7MX80zCcGsQqBoCzbhRhB1ycZGiCXvopSM1hATbI6i3mbhEFR5TUTMWwg7gAaudJn9TKsZt_RgTjU/pub?output=csv";
 
         const products = [
-            // Fresh Tea
-            { 
-                id: 101, 
-                category: 'tea', 
-                minQty: 2, 
-                name: 'Special Fresh Allam Chai', 
-                size: 'Select Number of People', 
-                price: 15, 
-                img: './1_2.jpg' 
-            },
-            
-            // Beverages & Juices
-            { 
-                id: 1, 
-                category: 'beverages', 
-                minQty: 1, 
-                name: 'Kinley Water Bottle', 
-                size: '1 Litre', 
-                price: 20, 
-                img: './Kinley.avif' 
-            },
-            { 
-                id: 2, 
-                category: 'beverages', 
-                minQty: 1, 
-                name: 'Bisleri Water Bottle', 
-                size: '1 Litre', 
-                price: 20, 
-                img: './bislery.avif' 
-            },
-            { 
-                id: 3, 
-                category: 'beverages', 
-                minQty: 1, 
-                name: 'Kinley Strong Soda', 
-                size: '750 ml', 
-                price: 20, 
-                img: './Kinley Strong Soda.avif' 
-            },
-            { 
-                id: 4, 
-                category: 'beverages', 
-                minQty: 1, 
-                name: 'Appy Fizz Sparkling Drink', 
-                size: '250 ml', 
-                price: 20, 
-                img: './Appy Fizz.avif' 
-            },
-            { 
-                id: 5, 
-                category: 'beverages', 
-                minQty: 1, 
-                name: 'Maaza Mango Drink', 
-                size: '150 ml', 
-                price: 15, 
-                img: './Maaza 150ml.avif' 
-            },
-            
-            // Dairy Products
-            { 
-                id: 6, 
-                category: 'dairy', 
-                minQty: 1, 
-                name: 'Heritage Total Curd Container', 
-                size: '1 kg', 
-                price: 100, 
-                img: './Heritage total curd.avif' 
-            },
-            { 
-                id: 7, 
-                category: 'dairy', 
-                minQty: 1, 
-                name: 'Heritage Fresh Paneer', 
-                size: '500g', 
-                price: 200, 
-                img: './Heritage Paneer.avif' 
-            },
-            { 
-                id: 8, 
-                category: 'dairy', 
-                minQty: 1, 
-                name: 'Heritage Premium Salted Butter', 
-                size: '500g', 
-                price: 275, 
-                img: './Heritage Butter.avif' 
-            },
-            { 
-                id: 9, 
-                category: 'dairy', 
-                minQty: 1, 
-                name: 'Godrej Jersey Badam Milk', 
-                size: '200 ml', 
-                price: 35, 
-                img: './Jersey Badam.avif' 
-            }
+            { id: 101, category: 'tea', minQty: 2, name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15, img: './1_2.jpg' },
+            { id: 1, category: 'beverages', minQty: 1, name: 'Kinley Water Bottle', size: '1 Litre', price: 20, img: './Kinley.avif' },
+            { id: 2, category: 'beverages', minQty: 1, name: 'Bisleri Water Bottle', size: '1 Litre', price: 20, img: './bislery.avif' },
+            { id: 3, category: 'beverages', minQty: 1, name: 'Kinley Strong Soda', size: '750 ml', price: 20, img: './Kinley Strong Soda.avif' },
+            { id: 4, category: 'beverages', minQty: 1, name: 'Appy Fizz Sparkling Drink', size: '250 ml', price: 20, img: './Appy Fizz.avif' },
+            { id: 5, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '150 ml', price: 15, img: './Maaza 150ml.avif' },
+            { id: 6, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '1 kg', price: 100, img: './Heritage total curd.avif' },
+            { id: 7, category: 'dairy', minQty: 1, name: 'Heritage Fresh Paneer', size: '500g', price: 200, img: './Heritage Paneer.avif' },
+            { id: 8, category: 'dairy', minQty: 1, name: 'Heritage Premium Salted Butter', size: '500g', price: 275, img: './Heritage Butter.avif' },
+            { id: 9, category: 'dairy', minQty: 1, name: 'Godrej Jersey Badam Milk', size: '200 ml', price: 35, img: './Jersey Badam.avif' }
         ];
 
         let cart = {};
         let selectedFulfillment = 'Delivery';
         window.pendingWhatsAppUrl = null;
+        window.outOfStockItems = [];
+
+        async function fetchLiveStockFromSheets() {
+            try {
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                const csvData = await response.text();
+                
+                const rows = csvData.split('\n').slice(1);
+                const outOfStockIds = [];
+
+                rows.forEach(row => {
+                    const columns = row.split(',');
+                    if (columns.length >= 3) {
+                        const id = parseInt(columns[0].trim());
+                        const status = columns[2].trim().toLowerCase();
+
+                        if (status === 'out of stock' || status === 'unavailable' || status === 'no') {
+                            outOfStockIds.push(id);
+                        }
+                    }
+                });
+
+                window.outOfStockItems = outOfStockIds;
+                renderMenu();
+            } catch (error) {
+                console.error("Could not fetch stock status from Google Sheets:", error);
+                renderMenu();
+            }
+        }
 
         function renderMenu() {
             const teaGrid = document.getElementById('tea-grid');
             const bevGrid = document.getElementById('beverages-grid');
             const dairyGrid = document.getElementById('dairy-grid');
 
+            teaGrid.innerHTML = '';
+            bevGrid.innerHTML = '';
+            dairyGrid.innerHTML = '';
+
             products.forEach(p => {
                 const isTea = p.category === 'tea';
+                const isOutOfStock = window.outOfStockItems.includes(p.id);
                 const priceDisplay = isTea ? `₹${p.price} / person` : `₹${p.price}`;
 
                 const card = `
-                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 hover:shadow-md transition">
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 ${isOutOfStock ? 'opacity-60 bg-slate-50' : ''}">
                         <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
                         <div class="flex-1">
                             <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
                             <p class="text-[11px] ${isTea ? 'text-amber-800 font-medium' : 'text-slate-500'}">${p.size}</p>
                             <p class="text-xs font-bold text-amber-900 mt-1">${priceDisplay}</p>
+                            ${isOutOfStock ? '<span class="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded mt-1 inline-block">Out of Stock</span>' : ''}
                         </div>
+                        ${!isOutOfStock ? `
                         <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-1">
                             <button onclick="updateCart(${p.id}, -1)" class="w-7 h-7 bg-white shadow-sm rounded-lg font-bold text-xs text-amber-900 flex items-center justify-center hover:bg-slate-50">-</button>
-                            <span id="qty-${p.id}" class="text-xs font-bold text-slate-800 min-w-[14px] text-center">0</span>
+                            <span id="qty-${p.id}" class="text-xs font-bold text-slate-800 min-w-[14px] text-center">${cart[p.id] || 0}</span>
                             <button onclick="updateCart(${p.id}, 1)" class="w-7 h-7 bg-amber-800 text-white shadow-sm rounded-lg font-bold text-xs flex items-center justify-center hover:bg-amber-900">+</button>
                         </div>
+                        ` : `
+                        <button disabled class="bg-slate-200 text-slate-400 font-bold text-xs px-3 py-1.5 rounded-xl cursor-not-allowed">Unavailable</button>
+                        `}
                     </div>
                 `;
                 if (isTea) teaGrid.innerHTML += card;
@@ -346,7 +299,8 @@
                 delete cart[id];
             }
 
-            document.getElementById(`qty-${id}`).innerText = cart[id] || 0;
+            const qtyElem = document.getElementById(`qty-${id}`);
+            if (qtyElem) qtyElem.innerText = cart[id] || 0;
             calculateTotal();
         }
 
@@ -405,7 +359,6 @@
             `;
             modalSummary.innerHTML = summaryHtml;
 
-            // Reset modal form button to original state
             const form = document.getElementById('order-form');
             form.onsubmit = processPayment;
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -447,11 +400,9 @@
 
             window.pendingWhatsAppUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
 
-            // 1. Trigger PhonePe payment
             const phonePeUri = `upi://pay?pa=${PHONEPE_UPI_ID}&pn=AllamChai&am=${total}&cu=INR`;
             window.location.href = phonePeUri;
 
-            // 2. Change button UI to allow WhatsApp notification after payment is complete
             const form = document.getElementById('order-form');
             const submitBtn = form.querySelector('button[type="submit"]');
             
@@ -488,7 +439,9 @@
             window.open(waUrl, '_blank');
         }
 
-        renderMenu();
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchLiveStockFromSheets();
+        });
     </script>
 
     <!-- Vercel Web Analytics Official Script -->
