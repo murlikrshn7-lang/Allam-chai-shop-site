@@ -209,7 +209,7 @@
                 name: 'Special Fresh Allam Chai', 
                 size: 'Select Number of People', 
                 price: 15, 
-                img: './1.png' 
+                img: './1_2.jpg' 
             },
             
             // Beverages & Juices
@@ -237,7 +237,7 @@
                 minQty: 1, 
                 name: 'Kinley Strong Soda', 
                 size: '750 ml', 
-                price: 21, 
+                price: 20, 
                 img: './Kinley Strong Soda.avif' 
             },
             { 
@@ -266,7 +266,7 @@
                 minQty: 1, 
                 name: 'Heritage Total Curd Container', 
                 size: '1 kg', 
-                price: 110, 
+                price: 100, 
                 img: './Heritage total curd.avif' 
             },
             { 
@@ -274,8 +274,8 @@
                 category: 'dairy', 
                 minQty: 1, 
                 name: 'Heritage Fresh Paneer', 
-                size: '200g', 
-                price: 130, 
+                size: '500g', 
+                price: 200, 
                 img: './Heritage Paneer.avif' 
             },
             { 
@@ -300,6 +300,7 @@
 
         let cart = {};
         let selectedFulfillment = 'Delivery';
+        window.pendingWhatsAppUrl = null;
 
         function renderMenu() {
             const teaGrid = document.getElementById('tea-grid');
@@ -404,6 +405,13 @@
             `;
             modalSummary.innerHTML = summaryHtml;
 
+            // Reset modal form button to original state
+            const form = document.getElementById('order-form');
+            form.onsubmit = processPayment;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2";
+            submitBtn.innerHTML = `<i class="fa-solid fa-lock text-xs"></i> Pay via PhonePe & Dispatch`;
+
             document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
@@ -437,13 +445,25 @@
                          `*Grand Total:* ₹${total}\n` +
                          `*Payment:* PhonePe UPI (${PHONEPE_UPI_ID})`;
 
+            window.pendingWhatsAppUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
+
+            // 1. Trigger PhonePe payment
             const phonePeUri = `upi://pay?pa=${PHONEPE_UPI_ID}&pn=AllamChai&am=${total}&cu=INR`;
             window.location.href = phonePeUri;
 
-            setTimeout(() => {
-                const waUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
-                window.open(waUrl, '_blank');
-            }, 1500);
+            // 2. Change button UI to allow WhatsApp notification after payment is complete
+            const form = document.getElementById('order-form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            submitBtn.className = "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2";
+            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp text-sm"></i> Payment Done? Send WhatsApp Notification`;
+            
+            form.onsubmit = function(evt) {
+                evt.preventDefault();
+                if (window.pendingWhatsAppUrl) {
+                    window.open(window.pendingWhatsAppUrl, '_blank');
+                }
+            };
         }
 
         function submitPartyOrder() {
