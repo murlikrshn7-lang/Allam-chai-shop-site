@@ -66,7 +66,7 @@
         <!-- Dairy Section -->
         <section>
             <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-cow text-amber-700"></i> Dairy Products (Heritage & Nandini)
+                <i class="fa-solid fa-cow text-amber-700"></i> Dairy Products (Heritage & Jersey)
             </h2>
             <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
@@ -184,12 +184,12 @@
                     <p class="text-xs font-medium text-amber-900">Payment Channel</p>
                     <div class="flex items-center gap-2 mt-1">
                         <i class="fa-solid fa-qrcode text-purple-700"></i>
-                        <span class="text-xs font-bold text-purple-900">Instant UPI Payment (PhonePe / GPay)</span>
+                        <span class="text-xs font-bold text-purple-900">PhonePe / UPI: 9676222557@ybl</span>
                     </div>
                 </div>
 
                 <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-lock text-xs"></i> Pay & Dispatch Order
+                    <i class="fa-solid fa-lock text-xs"></i> Pay via PhonePe & Dispatch
                 </button>
             </form>
         </div>
@@ -198,32 +198,104 @@
     <!-- Store & Cart Script -->
     <script>
         const STORE_WHATSAPP = "919676222557";
+        const PHONEPE_UPI_ID = "9676222557@ybl";
 
         const products = [
             // Fresh Tea
-            { id: 101, category: 'tea', minQty: 2, name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15, img: './1.png' },
+            { 
+                id: 101, 
+                category: 'tea', 
+                minQty: 2, 
+                name: 'Special Fresh Allam Chai', 
+                size: 'Select Number of People', 
+                price: 15, 
+                img: './1.png' 
+            },
             
-            // Beverages
-            { id: 1, category: 'beverages', minQty: 1, name: 'Kinley / Bisleri Water Bottle', size: '1 Litre', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/176/401/2246/front_en.11.400.jpg' },
-            { id: 2, category: 'beverages', minQty: 1, name: 'Kinley Strong Soda', size: '750 ml', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/176/402/1033/front_en.4.400.jpg' },
-            { id: 3, category: 'beverages', minQty: 1, name: 'Sting Energy Drink', size: '250 ml', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/149/110/1832/front_en.14.400.jpg' },
-            { id: 4, category: 'beverages', minQty: 1, name: 'Mountain Dew', size: '250 ml / 400 ml', price: 20, img: 'https://images.openfoodfacts.org/images/products/890/149/100/1576/front_en.11.400.jpg' },
-            { id: 5, category: 'beverages', minQty: 1, name: 'Mountain Dew', size: '750 ml', price: 40, img: 'https://images.openfoodfacts.org/images/products/890/149/100/1576/front_en.11.400.jpg' },
-            { id: 6, category: 'beverages', minQty: 1, name: 'Thums Up', size: '750 ml', price: 40, img: 'https://images.openfoodfacts.org/images/products/890/176/401/1072/front_en.18.400.jpg' },
-            { id: 7, category: 'beverages', minQty: 1, name: 'Thums Up', size: '2.25 Litres', price: 90, img: 'https://images.openfoodfacts.org/images/products/890/176/401/1072/front_en.18.400.jpg' },
-            { id: 8, category: 'beverages', minQty: 1, name: 'Sprite', size: '750 ml', price: 40, img: 'https://images.openfoodfacts.org/images/products/890/176/403/1070/front_en.12.400.jpg' },
-            { id: 9, category: 'beverages', minQty: 1, name: 'Sprite', size: '2.25 Litres', price: 90, img: 'https://images.openfoodfacts.org/images/products/890/176/403/1070/front_en.12.400.jpg' },
-            { id: 10, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '250 ml / 400 ml', price: 25, img: 'https://images.openfoodfacts.org/images/products/890/176/406/1015/front_en.8.400.jpg' },
-            { id: 11, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '600 ml / 750 ml', price: 40, img: 'https://images.openfoodfacts.org/images/products/890/176/406/1015/front_en.8.400.jpg' },
-            { id: 12, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '1.25 L / 1.5 L', price: 75, img: 'https://images.openfoodfacts.org/images/products/890/176/406/1015/front_en.8.400.jpg' },
+            // Beverages & Juices
+            { 
+                id: 1, 
+                category: 'beverages', 
+                minQty: 1, 
+                name: 'Kinley Water Bottle', 
+                size: '1 Litre', 
+                price: 20, 
+                img: './Kinley.avif' 
+            },
+            { 
+                id: 2, 
+                category: 'beverages', 
+                minQty: 1, 
+                name: 'Bisleri Water Bottle', 
+                size: '1 Litre', 
+                price: 20, 
+                img: './bislery.avif' 
+            },
+            { 
+                id: 3, 
+                category: 'beverages', 
+                minQty: 1, 
+                name: 'Kinley Strong Soda', 
+                size: '750 ml', 
+                price: 21, 
+                img: './Kinley Strong Soda.avif' 
+            },
+            { 
+                id: 4, 
+                category: 'beverages', 
+                minQty: 1, 
+                name: 'Appy Fizz Sparkling Drink', 
+                size: '250 ml', 
+                price: 20, 
+                img: './Appy Fizz.avif' 
+            },
+            { 
+                id: 5, 
+                category: 'beverages', 
+                minQty: 1, 
+                name: 'Maaza Mango Drink', 
+                size: '150 ml', 
+                price: 15, 
+                img: './Maaza 150ml.avif' 
+            },
             
-            // Dairy
-            { id: 13, category: 'dairy', minQty: 1, name: 'Nandini / Heritage Milk Pouch', size: '500 ml', price: 28, img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=150&q=80' },
-            { id: 14, category: 'dairy', minQty: 1, name: 'Heritage Curd Pouch', size: '200g', price: 20, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
-            { id: 15, category: 'dairy', minQty: 1, name: 'Heritage Curd Pouch', size: '500g', price: 35, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
-            { id: 16, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '450g', price: 55, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
-            { id: 17, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '1 kg', price: 100, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=150&q=80' },
-            { id: 18, category: 'dairy', minQty: 1, name: 'Heritage Fresh Paneer', size: '200g', price: 100, img: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=150&q=80' }
+            // Dairy Products
+            { 
+                id: 6, 
+                category: 'dairy', 
+                minQty: 1, 
+                name: 'Heritage Total Curd Container', 
+                size: '1 kg', 
+                price: 110, 
+                img: './Heritage total curd.avif' 
+            },
+            { 
+                id: 7, 
+                category: 'dairy', 
+                minQty: 1, 
+                name: 'Heritage Fresh Paneer', 
+                size: '200g', 
+                price: 130, 
+                img: './Heritage Paneer.avif' 
+            },
+            { 
+                id: 8, 
+                category: 'dairy', 
+                minQty: 1, 
+                name: 'Heritage Premium Salted Butter', 
+                size: '500g', 
+                price: 275, 
+                img: './Heritage Butter.avif' 
+            },
+            { 
+                id: 9, 
+                category: 'dairy', 
+                minQty: 1, 
+                name: 'Godrej Jersey Badam Milk', 
+                size: '200 ml', 
+                price: 35, 
+                img: './Jersey Badam.avif' 
+            }
         ];
 
         let cart = {};
@@ -240,7 +312,7 @@
 
                 const card = `
                     <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 hover:shadow-md transition">
-                        <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
+                        <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
                         <div class="flex-1">
                             <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
                             <p class="text-[11px] ${isTea ? 'text-amber-800 font-medium' : 'text-slate-500'}">${p.size}</p>
@@ -363,9 +435,9 @@
                          `*Items Ordered:*\n${itemsList}` +
                          `-----------------------------------\n` +
                          `*Grand Total:* ₹${total}\n` +
-                         `*Payment:* PhonePe / UPI Pending`;
+                         `*Payment:* PhonePe UPI (${PHONEPE_UPI_ID})`;
 
-            const phonePeUri = `upi://pay?pa=${STORE_WHATSAPP}@ybl&pn=AllamChai&am=${total}&cu=INR`;
+            const phonePeUri = `upi://pay?pa=${PHONEPE_UPI_ID}&pn=AllamChai&am=${total}&cu=INR`;
             window.location.href = phonePeUri;
 
             setTimeout(() => {
