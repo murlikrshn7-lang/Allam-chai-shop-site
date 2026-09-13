@@ -205,8 +205,6 @@
     <script>
         const STORE_WHATSAPP = "919676222557";
         const PHONEPE_UPI_ID = "9676222557@ybl";
-        
-        // REPLACE THIS URL with your published Google Sheet CSV link
         const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7MX80zCcGsQqBoCzbhRhB1ycZGiCXvopSM1hATbI6i3mbhEFR5TUTMWwg7gAaudJn9TKsZt_RgTjU/pub?output=csv";
 
         let products = [];
@@ -214,31 +212,28 @@
         let selectedFulfillment = 'Delivery';
         window.pendingWhatsAppUrl = null;
 
-        // Fetch products dynamically from Google Sheet
+        // Fetch products dynamically from Google Sheet with updated Column mappings (Col F: MinQty, Col G: Status, Col H: Image)
         async function fetchProductsFromSheets() {
             try {
-                // Add timestamp to bypass cache delay
                 const cacheBusterUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
                 const response = await fetch(cacheBusterUrl);
                 const csvText = await response.text();
                 
-                // Parse CSV lines (ignoring header row)
                 const rows = csvText.split('\n').map(row => row.trim()).filter(row => row.length > 0).slice(1);
                 
                 products = rows.map(row => {
-                    // Split CSV by comma while handling quotes if present
                     const cols = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
                     if (cols.length < 8) return null;
 
                     return {
-                        id: cols[0],
-                        category: cols[1].toLowerCase(),
-                        name: cols[2],
-                        size: cols[3],
-                        price: parseFloat(cols[4]) || 0,
-                        img: cols[5],
-                        minQty: parseInt(cols[6]) || 1,
-                        status: cols[7].toLowerCase()
+                        id: cols[0],                             // Col A: ID
+                        category: cols[1].toLowerCase(),         // Col B: Category
+                        name: cols[2],                           // Col C: Name
+                        size: cols[3],                           // Col D: Size
+                        price: parseFloat(cols[4]) || 0,         // Col E: Price
+                        minQty: parseInt(cols[5]) || 1,          // Col F: Min_Qty
+                        status: cols[6].toLowerCase(),           // Col G: Status
+                        img: cols[7]                             // Col H: Image_URL
                     };
                 }).filter(p => p !== null);
 
@@ -450,14 +445,7 @@
             window.open(waUrl, '_blank');
         }
 
-        // Initialize menu on DOM ready
         document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
     </script>
-
-    <!-- Vercel Web Analytics Official Script -->
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
