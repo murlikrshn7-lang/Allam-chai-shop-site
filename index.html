@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <!-- Banner -->
+    <!-- Legacy & Quality Banner -->
     <section class="bg-amber-100 border-b border-amber-200 py-3 text-center px-4">
         <span class="inline-block badge-legacy text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
             Premium Quality Guaranteed
@@ -52,7 +52,9 @@
                 </h2>
                 <span class="text-[11px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-semibold">Min. 2 Persons / Order</span>
             </div>
-            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-xs text-slate-400 col-span-2">Loading tea menu...</p>
+            </div>
         </section>
 
         <!-- Beverages Section -->
@@ -60,7 +62,9 @@
             <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-bottle-water text-amber-700"></i> Packaged Beverages & Juices
             </h2>
-            <div id="beverages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            <div id="beverages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-xs text-slate-400 col-span-2">Loading beverages...</p>
+            </div>
         </section>
 
         <!-- Dairy Section -->
@@ -68,7 +72,9 @@
             <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-cow text-amber-700"></i> Dairy Products (Heritage & Jersey)
             </h2>
-            <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-xs text-slate-400 col-span-2">Loading dairy items...</p>
+            </div>
         </section>
 
         <!-- Party Orders Section -->
@@ -148,9 +154,11 @@
             <h3 class="text-lg font-bold text-slate-800">Complete Your Order</h3>
             <p class="text-xs text-slate-500 mb-3">Review items and select fulfillment type</p>
 
+            <!-- Order Summary Inside Modal -->
             <div id="modal-cart-summary" class="bg-slate-50 border rounded-xl p-3 mb-4 space-y-1 text-xs"></div>
 
             <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
+                <!-- Fulfillment Method -->
                 <div>
                     <label class="text-xs font-semibold text-slate-600">Fulfillment Options</label>
                     <div class="grid grid-cols-2 gap-2 mt-1">
@@ -193,55 +201,50 @@
         </div>
     </div>
 
-    <!-- Script Section -->
+    <!-- Store & Cart Script -->
     <script>
         const STORE_WHATSAPP = "919676222557";
         const PHONEPE_UPI_ID = "9676222557@ybl";
+        
+        // REPLACE THIS URL with your published Google Sheet CSV link
         const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7MX80zCcGsQqBoCzbhRhB1ycZGiCXvopSM1hATbI6i3mbhEFR5TUTMWwg7gAaudJn9TKsZt_RgTjU/pub?output=csv";
 
-        const products = [
-            { id: 101, category: 'tea', minQty: 2, name: 'Special Fresh Allam Chai', size: 'Select Number of People', price: 15, img: './1_2.jpg' },
-            { id: 1, category: 'beverages', minQty: 1, name: 'Kinley Water Bottle', size: '1 Litre', price: 20, img: './Kinley.avif' },
-            { id: 2, category: 'beverages', minQty: 1, name: 'Bisleri Water Bottle', size: '1 Litre', price: 20, img: './bislery.avif' },
-            { id: 3, category: 'beverages', minQty: 1, name: 'Kinley Strong Soda', size: '750 ml', price: 20, img: './Kinley Strong Soda.avif' },
-            { id: 4, category: 'beverages', minQty: 1, name: 'Appy Fizz Sparkling Drink', size: '250 ml', price: 20, img: './Appy Fizz.avif' },
-            { id: 5, category: 'beverages', minQty: 1, name: 'Maaza Mango Drink', size: '150 ml', price: 15, img: './Maaza 150ml.avif' },
-            { id: 6, category: 'dairy', minQty: 1, name: 'Heritage Total Curd Container', size: '1 kg', price: 100, img: './Heritage total curd.avif' },
-            { id: 7, category: 'dairy', minQty: 1, name: 'Heritage Fresh Paneer', size: '500g', price: 200, img: './Heritage Paneer.avif' },
-            { id: 8, category: 'dairy', minQty: 1, name: 'Heritage Premium Salted Butter', size: '500g', price: 275, img: './Heritage Butter.avif' },
-            { id: 9, category: 'dairy', minQty: 1, name: 'Godrej Jersey Badam Milk', size: '200 ml', price: 35, img: './Jersey Badam.avif' }
-        ];
-
+        let products = [];
         let cart = {};
         let selectedFulfillment = 'Delivery';
         window.pendingWhatsAppUrl = null;
-        window.outOfStockItems = [];
 
-        async function fetchLiveStockFromSheets() {
+        // Fetch products dynamically from Google Sheet
+        async function fetchProductsFromSheets() {
             try {
-                const response = await fetch(GOOGLE_SHEET_CSV_URL);
-                const csvData = await response.text();
+                // Add timestamp to bypass cache delay
+                const cacheBusterUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+                const response = await fetch(cacheBusterUrl);
+                const csvText = await response.text();
                 
-                const rows = csvData.split('\n').slice(1);
-                const outOfStockIds = [];
+                // Parse CSV lines (ignoring header row)
+                const rows = csvText.split('\n').map(row => row.trim()).filter(row => row.length > 0).slice(1);
+                
+                products = rows.map(row => {
+                    // Split CSV by comma while handling quotes if present
+                    const cols = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
+                    if (cols.length < 8) return null;
 
-                rows.forEach(row => {
-                    const columns = row.split(',');
-                    if (columns.length >= 3) {
-                        const id = parseInt(columns[0].trim());
-                        const status = columns[2].trim().toLowerCase();
+                    return {
+                        id: cols[0],
+                        category: cols[1].toLowerCase(),
+                        name: cols[2],
+                        size: cols[3],
+                        price: parseFloat(cols[4]) || 0,
+                        img: cols[5],
+                        minQty: parseInt(cols[6]) || 1,
+                        status: cols[7].toLowerCase()
+                    };
+                }).filter(p => p !== null);
 
-                        if (status === 'out of stock' || status === 'unavailable' || status === 'no') {
-                            outOfStockIds.push(id);
-                        }
-                    }
-                });
-
-                window.outOfStockItems = outOfStockIds;
                 renderMenu();
-            } catch (error) {
-                console.error("Could not fetch stock status from Google Sheets:", error);
-                renderMenu();
+            } catch (err) {
+                console.error("Error loading products from Google Sheet:", err);
             }
         }
 
@@ -256,37 +259,41 @@
 
             products.forEach(p => {
                 const isTea = p.category === 'tea';
-                const isOutOfStock = window.outOfStockItems.includes(p.id);
                 const priceDisplay = isTea ? `₹${p.price} / person` : `₹${p.price}`;
+                const isAvailable = p.status === 'available' || p.status === 'in stock';
+                const currentCartQty = cart[p.id] || 0;
 
-                const card = `
-                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 ${isOutOfStock ? 'opacity-60 bg-slate-50' : ''}">
+                const cardHtml = `
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 hover:shadow-md transition ${!isAvailable ? 'opacity-60' : ''}">
                         <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
                         <div class="flex-1">
                             <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
                             <p class="text-[11px] ${isTea ? 'text-amber-800 font-medium' : 'text-slate-500'}">${p.size}</p>
                             <p class="text-xs font-bold text-amber-900 mt-1">${priceDisplay}</p>
-                            ${isOutOfStock ? '<span class="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded mt-1 inline-block">Out of Stock</span>' : ''}
+                            ${!isAvailable ? '<span class="inline-block mt-1 text-[10px] bg-red-100 text-red-700 font-bold px-1.5 py-0.5 rounded">Out of Stock</span>' : ''}
                         </div>
-                        ${!isOutOfStock ? `
-                        <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-1">
-                            <button onclick="updateCart(${p.id}, -1)" class="w-7 h-7 bg-white shadow-sm rounded-lg font-bold text-xs text-amber-900 flex items-center justify-center hover:bg-slate-50">-</button>
-                            <span id="qty-${p.id}" class="text-xs font-bold text-slate-800 min-w-[14px] text-center">${cart[p.id] || 0}</span>
-                            <button onclick="updateCart(${p.id}, 1)" class="w-7 h-7 bg-amber-800 text-white shadow-sm rounded-lg font-bold text-xs flex items-center justify-center hover:bg-amber-900">+</button>
-                        </div>
+                        ${isAvailable ? `
+                            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-1">
+                                <button onclick="updateCart('${p.id}', -1)" class="w-7 h-7 bg-white shadow-sm rounded-lg font-bold text-xs text-amber-900 flex items-center justify-center hover:bg-slate-50">-</button>
+                                <span id="qty-${p.id}" class="text-xs font-bold text-slate-800 min-w-[14px] text-center">${currentCartQty}</span>
+                                <button onclick="updateCart('${p.id}', 1)" class="w-7 h-7 bg-amber-800 text-white shadow-sm rounded-lg font-bold text-xs flex items-center justify-center hover:bg-amber-900">+</button>
+                            </div>
                         ` : `
-                        <button disabled class="bg-slate-200 text-slate-400 font-bold text-xs px-3 py-1.5 rounded-xl cursor-not-allowed">Unavailable</button>
+                            <button disabled class="px-3 py-1.5 bg-slate-200 text-slate-400 font-bold rounded-xl text-xs cursor-not-allowed">Unavailable</button>
                         `}
                     </div>
                 `;
-                if (isTea) teaGrid.innerHTML += card;
-                else if (p.category === 'beverages') bevGrid.innerHTML += card;
-                else dairyGrid.innerHTML += card;
+
+                if (isTea) teaGrid.innerHTML += cardHtml;
+                else if (p.category === 'beverages') bevGrid.innerHTML += cardHtml;
+                else dairyGrid.innerHTML += cardHtml;
             });
         }
 
         function updateCart(id, change) {
             const prod = products.find(p => p.id == id);
+            if (!prod) return;
+
             let currentQty = cart[id] || 0;
 
             if (change > 0 && currentQty === 0) {
@@ -308,7 +315,7 @@
             let total = 0;
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
-                total += prod.price * cart[id];
+                if (prod) total += prod.price * cart[id];
             });
             document.getElementById('total-price').innerText = `₹${total}`;
             return total;
@@ -343,13 +350,15 @@
             
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
-                const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
-                summaryHtml += `
-                    <div class="flex justify-between items-center py-0.5">
-                        <span class="text-slate-600">${prod.name} (${cart[id]} ${unitText})</span>
-                        <span class="font-semibold text-slate-800">₹${prod.price * cart[id]}</span>
-                    </div>
-                `;
+                if (prod) {
+                    const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
+                    summaryHtml += `
+                        <div class="flex justify-between items-center py-0.5">
+                            <span class="text-slate-600">${prod.name} (${cart[id]} ${unitText})</span>
+                            <span class="font-semibold text-slate-800">₹${prod.price * cart[id]}</span>
+                        </div>
+                    `;
+                }
             });
             summaryHtml += `
                 <div class="flex justify-between items-center border-t pt-1.5 mt-1 font-bold text-amber-900">
@@ -382,8 +391,10 @@
             let itemsList = '';
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
-                const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
-                itemsList += `• ${prod.name} x ${cart[id]} ${unitText} = ₹${prod.price * cart[id]}\n`;
+                if (prod) {
+                    const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
+                    itemsList += `• ${prod.name} x ${cart[id]} ${unitText} = ₹${prod.price * cart[id]}\n`;
+                }
             });
 
             const text = `*NEW ONLINE ORDER - ALLAM CHAI (KEESARA)*\n` +
@@ -439,9 +450,8 @@
             window.open(waUrl, '_blank');
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchLiveStockFromSheets();
-        });
+        // Initialize menu on DOM ready
+        document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
     </script>
 
     <!-- Vercel Web Analytics Official Script -->
