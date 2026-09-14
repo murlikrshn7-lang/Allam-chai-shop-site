@@ -3,245 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allam Chai | Express Delivery & Party Catering</title>
+    <title>Allam Chai - Keesara Branch</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .badge-legacy { background: linear-gradient(135deg, #d97706, #b45309); }
-        .product-img { object-fit: cover; aspect-ratio: 1/1; }
-    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-amber-50/50 text-slate-800 font-sans pb-28">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-24">
 
-    <!-- Header & Hero -->
-    <header class="bg-amber-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Header / Brand -->
+    <header class="bg-[#5c2406] text-white p-4 shadow-md sticky top-0 z-30">
+        <div class="max-w-md mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-amber-950 font-bold text-lg shadow-md">
-                    ☕
+                <div class="bg-amber-500 p-2.5 rounded-full text-white shadow-sm flex items-center justify-center">
+                    <i data-lucide="coffee" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-wide flex items-center gap-1.5">
-                        Allam Chai
-                    </h1>
-                    <p class="text-[11px] text-amber-200">Keesara Branch • Serving Fresh Brews & Pure Dairy</p>
+                    <h1 class="text-xl font-bold tracking-tight">Allam Chai</h1>
+                    <p class="text-xs text-amber-200">Keesara Branch • Serving Fresh Brews & Pure Dairy</p>
                 </div>
             </div>
-            <a href="#party-orders" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition">
-                🎉 Party Orders
+            <a href="#party-section" class="bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition flex items-center gap-1">
+                <span>🎉 Party Orders</span>
             </a>
         </div>
     </header>
 
-    <!-- Legacy & Quality Banner -->
-    <section class="bg-amber-100 border-b border-amber-200 py-3 text-center px-4">
-        <span class="inline-block badge-legacy text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
-            Premium Quality Guaranteed
-        </span>
-        <p class="text-xs text-amber-900 font-medium">Authentic Allam Chai, fresh Heritage dairy, and chilled beverages delivered instantly in Keesara or available for quick store pickup.</p>
-    </section>
+    <!-- Sub-header Banner -->
+    <div class="bg-[#1c1d04] text-white py-4 px-4 text-center space-y-2 border-b border-amber-950">
+        <div class="max-w-md mx-auto">
+            <span class="inline-block bg-[#b85b00] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider mb-1">
+                Premium Quality Guaranteed
+            </span>
+            <p class="text-xs text-amber-100/90 leading-relaxed">
+                Authentic Allam Chai, fresh Heritage dairy, and chilled beverages delivered instantly in Keesara or available for quick store pickup.
+            </p>
+        </div>
+    </div>
 
     <!-- Main Content Container -->
-    <main class="max-w-4xl mx-auto px-4 mt-6 space-y-8">
+    <main class="max-w-md mx-auto p-4 space-y-6">
 
-        <!-- Hot Teas Section -->
-        <section>
-            <div class="flex justify-between items-end border-b-2 border-amber-800 pb-2 mb-4">
-                <h2 class="text-lg font-bold text-amber-900 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-amber-600"></i> Fresh Hot Tea
-                </h2>
-                <span class="text-[11px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-semibold">Min. 2 Persons / Order</span>
-            </div>
-            <div id="tea-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p class="text-xs text-slate-400 col-span-2">Loading tea menu...</p>
-            </div>
-        </section>
+        <!-- Category Tabs -->
+        <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <a href="#tea-section" class="px-4 py-2 bg-amber-100 text-amber-900 font-bold rounded-xl text-xs whitespace-nowrap shadow-sm border border-amber-200">🍵 Tea</a>
+            <a href="#beverages-section" class="px-4 py-2 bg-white text-slate-700 font-bold rounded-xl text-xs whitespace-nowrap shadow-sm border border-slate-200">🥤 Beverages</a>
+            <a href="#dairy-section" class="px-4 py-2 bg-white text-slate-700 font-bold rounded-xl text-xs whitespace-nowrap shadow-sm border border-slate-200">🥛 Dairy Products</a>
+        </div>
 
-        <!-- Beverages Section -->
-        <section>
-            <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-bottle-water text-amber-700"></i> Packaged Beverages & Juices
-            </h2>
-            <div id="beverages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p class="text-xs text-slate-400 col-span-2">Loading beverages...</p>
-            </div>
-        </section>
-
-        <!-- Dairy Section -->
-        <section>
-            <h2 class="text-lg font-bold text-amber-900 border-b-2 border-amber-800 pb-2 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-cow text-amber-700"></i> Dairy Products (Heritage & Jersey)
-            </h2>
-            <div id="dairy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p class="text-xs text-slate-400 col-span-2">Loading dairy items...</p>
-            </div>
-        </section>
-
-        <!-- Party Orders Section -->
-        <section id="party-orders" class="bg-amber-900 text-white rounded-2xl p-6 shadow-xl border border-amber-700">
-            <h3 class="text-lg font-bold text-amber-300 mb-1 flex items-center gap-2">
-                <i class="fa-solid fa-champagne-glasses"></i> Bulk & Party Catering Inquiry
+        <!-- Section: Tea -->
+        <section id="tea-section">
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
+                <span>🍵 Tea Options</span>
             </h3>
-            <p class="text-xs text-amber-100 mb-4">Planning an office meeting, family event, or private gathering in Keesara? Contact us directly for bulk flask deliveries and catering setups.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <input type="text" id="party-name" placeholder="Your Name" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
-                <input type="tel" id="party-phone" placeholder="Phone Number" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
-                <input type="date" id="party-date" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
-                <input type="text" id="party-guests" placeholder="Estimated Guests / Order Details" class="p-2.5 rounded-lg text-xs text-slate-800 outline-none">
+            <div id="tea-grid" class="space-y-3">
+                <p class="text-xs text-slate-400 italic">Loading menu...</p>
             </div>
-            <button onclick="submitPartyOrder()" class="mt-4 w-full bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-base"></i> Inquire Party Order on WhatsApp
+        </section>
+
+        <!-- Section: Beverages -->
+        <section id="beverages-section">
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
+                <span>🥤 Cold Beverages</span>
+            </h3>
+            <div id="beverages-grid" class="space-y-3">
+                <p class="text-xs text-slate-400 italic">Loading menu...</p>
+            </div>
+        </section>
+
+        <!-- Section: Dairy -->
+        <section id="dairy-section">
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
+                <span>🥛 Dairy Essentials</span>
+            </h3>
+            <div id="dairy-grid" class="space-y-3">
+                <p class="text-xs text-slate-400 italic">Loading menu...</p>
+            </div>
+        </section>
+
+        <!-- Section: Party Orders Inquiry -->
+        <section id="party-section" class="bg-[#612807] text-white p-5 rounded-2xl shadow-lg border border-amber-900 space-y-4">
+            <div>
+                <h3 class="font-bold text-base text-amber-200 flex items-center gap-2">
+                    <i data-lucide="party-popper" class="w-5 h-5 text-amber-400"></i>
+                    <span>Bulk & Party Catering Inquiry</span>
+                </h3>
+                <p class="text-xs text-amber-100/80 mt-1 leading-relaxed">
+                    Planning an office meeting, family event, or private gathering in Keesara? Contact us directly for bulk flask deliveries and catering setups.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3">
+                <input type="text" id="party-name" placeholder="Your Name" class="w-full text-xs p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-amber-500">
+                <input type="tel" id="party-phone" placeholder="Phone Number" class="w-full text-xs p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-amber-500">
+                <input type="date" id="party-date" class="w-full text-xs p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-amber-500">
+                <input type="text" id="party-details" placeholder="Estimated Guests / Order Details" class="w-full text-xs p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-amber-500">
+            </div>
+
+            <button onclick="dispatchPartyInquiry()" class="w-full bg-[#fbbd23] hover:bg-amber-400 text-amber-950 font-extrabold py-3.5 rounded-xl shadow-md transition text-xs tracking-wider uppercase flex items-center justify-center gap-2">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Inquire Party Order on WhatsApp</span>
             </button>
         </section>
 
-        <!-- Physical Store & Location Footer -->
-        <footer class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
-            <h3 class="text-sm font-bold text-amber-900 border-b pb-2 flex items-center gap-2">
-                <i class="fa-solid fa-store text-amber-700"></i> Store Location & Operating Hours
+        <!-- Section: Store Location & Operating Hours -->
+        <section class="bg-[#121417] text-white p-5 rounded-2xl shadow-lg border border-slate-800 space-y-4">
+            <h3 class="font-bold text-sm text-amber-400 uppercase tracking-wider border-b border-slate-800 pb-2 flex items-center gap-2">
+                <i data-lucide="store" class="w-4 h-4"></i>
+                <span>Store Location & Operating Hours</span>
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="space-y-3">
-                    <p class="font-semibold text-slate-800 flex items-start gap-2">
-                        <i class="fa-solid fa-location-dot text-amber-700 mt-0.5 text-sm"></i>
-                        <span><strong>Allam Chai</strong><br>Keesara, Medchal-Malkajgiri District,<br>Telangana - 501301</span>
-                    </p>
-                    <p class="text-slate-600 flex items-center gap-2">
-                        <i class="fa-solid fa-clock text-amber-700"></i> Open Daily: 5:30 AM – 10:30 PM
-                    </p>
-                    <p class="text-slate-600 flex items-center gap-2">
-                        <i class="fa-solid fa-phone text-amber-700"></i> +91 96762 22557
-                    </p>
-                    <a href="https://share.google/o21jHyzIt9XRujtdq" target="_blank" class="inline-flex items-center gap-2 text-xs text-amber-800 bg-amber-100 hover:bg-amber-200 font-bold px-3 py-2 rounded-lg transition">
-                        <i class="fa-solid fa-map-location-dot"></i> Open Location in Google Maps
-                    </a>
+
+            <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 mt-0.5 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-100">Allam Chai</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Keesara, Medchal-Malkajgiri District,<br>Telangana - 501301</p>
+                    </div>
                 </div>
-                <div class="rounded-xl overflow-hidden border border-slate-200 h-36 bg-slate-100 flex flex-col items-center justify-center p-4 text-center">
-                    <i class="fa-solid fa-map-pin text-amber-800 text-3xl mb-2"></i>
-                    <p class="font-bold text-slate-800 text-xs mb-1">Allam Chai - Keesara Store Location</p>
-                    <a href="https://share.google/o21jHyzIt9XRujtdq" target="_blank" class="text-[11px] text-amber-700 underline font-semibold">
-                        Click to navigate on Google Maps
-                    </a>
+
+                <div class="flex items-center gap-3">
+                    <i data-lucide="clock" class="w-4 h-4 text-amber-500 shrink-0"></i>
+                    <p class="text-xs text-slate-300">Open Daily: <span class="font-semibold text-white">4.00 AM – 9.00 PM</span></p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <i data-lucide="phone" class="w-4 h-4 text-amber-500 shrink-0"></i>
+                    <a href="tel:+919676222557" class="text-xs font-semibold text-slate-200 hover:text-amber-400">+91 96762 22557</a>
                 </div>
             </div>
-            <div class="text-center pt-2 border-t border-slate-100">
-                <a href="admin.html" class="text-[11px] text-slate-400 hover:text-amber-800 underline font-medium">
-                    Store Staff Login (Admin Portal)
-                </a>
-            </div>
-        </footer>
+
+            <!-- Google Maps Card Box -->
+            <a href="https://maps.google.com/?q=Allam+Chai+Keesara" target="_blank" class="block bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-xl p-4 text-center space-y-2 transition group">
+                <div class="w-8 h-8 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto group-hover:bg-amber-500 group-hover:text-slate-950 transition">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-200">Allam Chai - Keesara Store Location</p>
+                    <p class="text-[11px] text-amber-500 font-semibold underline mt-0.5">Click to navigate on Google Maps</p>
+                </div>
+            </a>
+
+            <a href="https://maps.google.com/?q=Allam+Chai+Keesara" target="_blank" class="w-full bg-[#382b09] hover:bg-[#4a390b] text-amber-400 font-bold py-2.5 rounded-xl border border-amber-900/50 text-xs flex items-center justify-center gap-2 transition">
+                <i data-lucide="navigation" class="w-4 h-4"></i>
+                <span>Open Location in Google Maps</span>
+            </a>
+        </section>
 
     </main>
 
-    <!-- Bottom Sticky Cart Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-2xl p-4 z-40">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <!-- Sticky Bottom Bar -->
+    <div id="bottom-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-3 shadow-lg z-20">
+        <div class="max-w-md mx-auto flex items-center justify-between gap-4">
             <div>
-                <p class="text-xs text-slate-500">Order Subtotal</p>
-                <p id="total-price" class="text-xl font-bold text-slate-800">₹0</p>
+                <p class="text-xs text-slate-500 font-medium">Items Selected</p>
+                <p id="total-count" class="text-base font-bold text-slate-800">0 Items</p>
             </div>
-            <button onclick="openCheckoutModal()" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-lg transition">
-                <span>Proceed to Checkout</span> <i class="fa-solid fa-arrow-right"></i>
+            <button onclick="openCheckoutModal()" class="flex-1 bg-[#5c2406] hover:bg-amber-950 text-white font-bold py-3 px-4 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                <span>Proceed to Order</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
         </div>
     </div>
 
     <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <h3 class="text-lg font-bold text-slate-800">Complete Your Order</h3>
-            <p class="text-xs text-slate-500 mb-3">Review items and select fulfillment type</p>
-
-            <!-- Order Summary Inside Modal -->
-            <div id="modal-cart-summary" class="bg-slate-50 border rounded-xl p-3 mb-4 space-y-1 text-xs"></div>
-
-            <form id="order-form" onsubmit="processPayment(event)" class="space-y-3">
-                <!-- Fulfillment Method -->
-                <div>
-                    <label class="text-xs font-semibold text-slate-600">Fulfillment Options</label>
-                    <div class="grid grid-cols-2 gap-2 mt-1">
-                        <label class="border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300" id="label-delivery">
-                            <input type="radio" name="fulfillment" value="Delivery" checked onclick="toggleFulfillment('Delivery')" class="accent-amber-800">
-                            <span class="text-xs font-bold text-amber-900">Express Delivery</span>
-                        </label>
-                        <label class="border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200" id="label-pickup">
-                            <input type="radio" name="fulfillment" value="Store Pickup" onclick="toggleFulfillment('Store Pickup')" class="accent-amber-800">
-                            <span class="text-xs font-bold text-slate-700">Store Pickup</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="text-xs font-semibold text-slate-600">Full Name</label>
-                    <input type="text" id="cust-name" required class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600">
-                </div>
-                <div>
-                    <label class="text-xs font-semibold text-slate-600">Phone Number</label>
-                    <input type="tel" id="cust-phone" required class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600">
-                </div>
-                <div id="address-container">
-                    <label class="text-xs font-semibold text-slate-600">Delivery Address in Keesara</label>
-                    <textarea id="cust-address" required rows="2" placeholder="House no, Street, Landmark..." class="w-full p-2 border rounded-lg text-xs mt-1 outline-none focus:border-amber-600"></textarea>
-                </div>
-                
-                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
-                    <p class="text-xs font-medium text-amber-900">Payment Channel</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <i class="fa-solid fa-qrcode text-purple-700"></i>
-                        <span class="text-xs font-bold text-purple-900">PhonePe / UPI: 9676222557@ybl</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-lock text-xs"></i> Pay via PhonePe & Dispatch
+    <div id="checkout-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg text-slate-800">Complete Your Order</h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
-            </form>
+            </div>
+
+            <!-- Order Summary (No Prices) -->
+            <div id="modal-cart-summary" class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
+            </div>
+
+            <!-- Fulfillment Option -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase">Fulfillment Mode</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="btn-pickup" type="button" onclick="setFulfillment('pickup')" class="py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-amber-800 bg-amber-50 text-amber-900">
+                        📦 Store Pickup
+                    </button>
+                    <button id="btn-delivery" type="button" onclick="setFulfillment('delivery')" class="py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-slate-200 bg-white text-slate-600">
+                        🛵 Express Delivery
+                    </button>
+                </div>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Your Name</label>
+                    <input type="text" id="cust-name" placeholder="Enter your full name" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Phone Number</label>
+                    <input type="tel" id="cust-phone" placeholder="Enter mobile number" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-800">
+                </div>
+                <div id="address-container" class="hidden">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Delivery Address</label>
+                    <textarea id="cust-address" placeholder="Enter street / landmark address" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-800" rows="2"></textarea>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="dispatchOrder()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2 mt-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Send Order via WhatsApp</span>
+            </button>
         </div>
     </div>
 
-    <!-- Store & Cart Script -->
+    <!-- Application Script -->
     <script>
         const STORE_WHATSAPP = "919676222557";
-        const PHONEPE_UPI_ID = "9676222557@ybl";
-        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7MX80zCcGsQqBoCzbhRhB1ycZGiCXvopSM1hATbI6i3mbhEFR5TUTMWwg7gAaudJn9TKsZt_RgTjU/pub?output=csv";
 
-        let products = [];
+        const fallbackProducts = [
+            { id: "101", category: "tea", name: "Special Fresh Allam Chai", size: "Select Number of People", minQty: 2, status: "available", img: "./1.png" },
+            { id: "1", category: "beverages", name: "Kinley Water Bottle", size: "1 Litre", minQty: 1, status: "available", img: "./Kinley.avif" },
+            { id: "2", category: "beverages", name: "Bisleri Water Bottle", size: "1 Litre", minQty: 1, status: "available", img: "./bislery.avif" },
+            { id: "3", category: "beverages", name: "Kinley Strong Soda", size: "250ml", minQty: 1, status: "available", img: "./Kinley Strong Soda.avif" },
+            { id: "4", category: "beverages", name: "Thums up", size: "250ml", minQty: 1, status: "available", img: "./Thums up.avif" },
+            { id: "5", category: "beverages", name: "Sprite", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "6", category: "beverages", name: "Pulpy Orage", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "7", category: "beverages", name: "Maaza Mango Drink", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "8", category: "beverages", name: "Appy Fizz Sparkling Drink", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "9", category: "beverages", name: "Maaza Mango Drink", size: "600ml", minQty: 1, status: "available", img: "" },
+            { id: "10", category: "beverages", name: "Godrej Jersey Badam Milk", size: "200 ml", minQty: 1, status: "available", img: "" },
+            { id: "11", category: "beverages", name: "Thums up", size: "1 Litre", minQty: 1, status: "available", img: "" },
+            { id: "12", category: "beverages", name: "Sprite", size: "1 Litre", minQty: 1, status: "available", img: "" },
+            { id: "13", category: "beverages", name: "Kinley Strong Soda", size: "500ml", minQty: 1, status: "available", img: "" },
+            { id: "14", category: "beverages", name: "Sting", size: "200ml", minQty: 1, status: "available", img: "" },
+            { id: "15", category: "beverages", name: "Thums up", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "16", category: "beverages", name: "Sprite", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "17", category: "beverages", name: "Pulpy Orage", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "18", category: "beverages", name: "Maaza Mango Drink", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "19", category: "beverages", name: "Mountain Dew", size: "500ml", minQty: 1, status: "available", img: "" },
+            { id: "20", category: "dairy", name: "Heritage Total Curd Container", size: "1 kg", minQty: 1, status: "available", img: "" },
+            { id: "21", category: "dairy", name: "Heritage Premium Salted Butter", size: "500g", minQty: 1, status: "available", img: "" },
+            { id: "22", category: "dairy", name: "Heritage Fresh Paneer", size: "200g", minQty: 1, status: "available", img: "" },
+            { id: "23", category: "dairy", name: "Heritage Total Curd", size: "500g", minQty: 1, status: "available", img: "" }
+        ];
+
+        let products = [...fallbackProducts];
         let cart = {};
-        let selectedFulfillment = 'Delivery';
-        window.pendingWhatsAppUrl = null;
+        let fulfillmentType = 'pickup';
 
-        // Fetch products dynamically from Google Sheet with updated Column mappings (Col F: MinQty, Col G: Status, Col H: Image)
-        async function fetchProductsFromSheets() {
-            try {
-                const cacheBusterUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
-                const response = await fetch(cacheBusterUrl);
-                const csvText = await response.text();
-                
-                const rows = csvText.split('\n').map(row => row.trim()).filter(row => row.length > 0).slice(1);
-                
-                products = rows.map(row => {
-                    const cols = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
-                    if (cols.length < 8) return null;
-
-                    return {
-                        id: cols[0],                             // Col A: ID
-                        category: cols[1].toLowerCase(),         // Col B: Category
-                        name: cols[2],                           // Col C: Name
-                        size: cols[3],                           // Col D: Size
-                        price: parseFloat(cols[4]) || 0,         // Col E: Price
-                        minQty: parseInt(cols[5]) || 1,          // Col F: Min_Qty
-                        status: cols[6].toLowerCase(),           // Col G: Status
-                        img: cols[7]                             // Col H: Image_URL
-                    };
-                }).filter(p => p !== null);
-
-                renderMenu();
-            } catch (err) {
-                console.error("Error loading products from Google Sheet:", err);
-            }
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            renderMenu();
+        });
 
         function renderMenu() {
             const teaGrid = document.getElementById('tea-grid');
@@ -254,17 +269,15 @@
 
             products.forEach(p => {
                 const isTea = p.category === 'tea';
-                const priceDisplay = isTea ? `₹${p.price} / person` : `₹${p.price}`;
-                const isAvailable = p.status === 'available' || p.status === 'in stock';
+                const isAvailable = p.status.toLowerCase() === 'available' || p.status.toLowerCase() === 'in stock';
                 const currentCartQty = cart[p.id] || 0;
 
                 const cardHtml = `
                     <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-3 hover:shadow-md transition ${!isAvailable ? 'opacity-60' : ''}">
-                        <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl product-img bg-slate-100 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
+                        <img src="${p.img}" alt="${p.name}" class="w-16 h-16 rounded-xl object-cover bg-slate-100 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=150&q=80'">
                         <div class="flex-1">
                             <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
                             <p class="text-[11px] ${isTea ? 'text-amber-800 font-medium' : 'text-slate-500'}">${p.size}</p>
-                            <p class="text-xs font-bold text-amber-900 mt-1">${priceDisplay}</p>
                             ${!isAvailable ? '<span class="inline-block mt-1 text-[10px] bg-red-100 text-red-700 font-bold px-1.5 py-0.5 rounded">Out of Stock</span>' : ''}
                         </div>
                         ${isAvailable ? `
@@ -285,52 +298,54 @@
             });
         }
 
-        function updateCart(id, change) {
-            const prod = products.find(p => p.id == id);
+        function updateCart(productId, delta) {
+            const prod = products.find(p => p.id == productId);
             if (!prod) return;
 
-            let currentQty = cart[id] || 0;
+            let currentQty = cart[productId] || 0;
 
-            if (change > 0 && currentQty === 0) {
-                cart[id] = prod.minQty;
+            if (currentQty === 0 && delta > 0) {
+                cart[productId] = Math.max(prod.minQty, delta);
             } else {
-                cart[id] = currentQty + change;
+                let newQty = currentQty + delta;
+                if (newQty < prod.minQty && delta < 0) {
+                    delete cart[productId];
+                } else if (newQty > 0) {
+                    cart[productId] = newQty;
+                } else {
+                    delete cart[productId];
+                }
             }
 
-            if (cart[id] < prod.minQty) {
-                delete cart[id];
-            }
+            const qtyEl = document.getElementById(`qty-${productId}`);
+            if (qtyEl) qtyEl.innerText = cart[productId] || 0;
 
-            const qtyElem = document.getElementById(`qty-${id}`);
-            if (qtyElem) qtyElem.innerText = cart[id] || 0;
-            calculateTotal();
+            calculateTotals();
         }
 
-        function calculateTotal() {
-            let total = 0;
-            Object.keys(cart).forEach(id => {
-                const prod = products.find(p => p.id == id);
-                if (prod) total += prod.price * cart[id];
+        function calculateTotals() {
+            let totalCount = 0;
+            Object.values(cart).forEach(qty => {
+                totalCount += qty;
             });
-            document.getElementById('total-price').innerText = `₹${total}`;
-            return total;
+
+            document.getElementById('total-count').innerText = `${totalCount} Item${totalCount !== 1 ? 's' : ''}`;
         }
 
-        function toggleFulfillment(type) {
-            selectedFulfillment = type;
+        function setFulfillment(type) {
+            fulfillmentType = type;
+            const btnPickup = document.getElementById('btn-pickup');
+            const btnDelivery = document.getElementById('btn-delivery');
             const addrContainer = document.getElementById('address-container');
-            const addrInput = document.getElementById('cust-address');
 
-            if (type === 'Store Pickup') {
+            if (type === 'pickup') {
+                btnPickup.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-amber-800 bg-amber-50 text-amber-900";
+                btnDelivery.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-slate-200 bg-white text-slate-600";
                 addrContainer.classList.add('hidden');
-                addrInput.removeAttribute('required');
-                document.getElementById('label-pickup').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
-                document.getElementById('label-delivery').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
             } else {
+                btnDelivery.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-amber-800 bg-amber-50 text-amber-900";
+                btnPickup.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-slate-200 bg-white text-slate-600";
                 addrContainer.classList.remove('hidden');
-                addrInput.setAttribute('required', 'true');
-                document.getElementById('label-delivery').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-amber-50 border-amber-300';
-                document.getElementById('label-pickup').className = 'border p-2.5 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 border-slate-200';
             }
         }
 
@@ -341,34 +356,22 @@
             }
 
             const modalSummary = document.getElementById('modal-cart-summary');
-            let summaryHtml = `<p class="font-bold text-slate-700 border-b pb-1 mb-2">Order Summary</p>`;
-            
+            let summaryHtml = `<p class="font-bold text-slate-800 border-b pb-1 mb-2">Order Items Summary</p>`;
+
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
                 if (prod) {
                     const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
                     summaryHtml += `
                         <div class="flex justify-between items-center py-0.5">
-                            <span class="text-slate-600">${prod.name} (${cart[id]} ${unitText})</span>
-                            <span class="font-semibold text-slate-800">₹${prod.price * cart[id]}</span>
+                            <span class="text-slate-700">${prod.name} (${prod.size})</span>
+                            <span class="font-bold text-slate-900">${cart[id]} ${unitText}</span>
                         </div>
                     `;
                 }
             });
-            summaryHtml += `
-                <div class="flex justify-between items-center border-t pt-1.5 mt-1 font-bold text-amber-900">
-                    <span>Subtotal</span>
-                    <span>₹${calculateTotal()}</span>
-                </div>
-            `;
+
             modalSummary.innerHTML = summaryHtml;
-
-            const form = document.getElementById('order-form');
-            form.onsubmit = processPayment;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2";
-            submitBtn.innerHTML = `<i class="fa-solid fa-lock text-xs"></i> Pay via PhonePe & Dispatch`;
-
             document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
@@ -376,76 +379,72 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         }
 
-        function processPayment(e) {
-            e.preventDefault();
-            const name = document.getElementById('cust-name').value;
-            const phone = document.getElementById('cust-phone').value;
-            const address = selectedFulfillment === 'Delivery' ? document.getElementById('cust-address').value : 'Keesara Counter Pickup';
-            const total = calculateTotal();
+        function dispatchOrder() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
 
-            let itemsList = '';
+            if (!name || !phone) {
+                alert('Please enter your name and phone number.');
+                return;
+            }
+
+            if (fulfillmentType === 'delivery' && !address) {
+                alert('Please enter your delivery address.');
+                return;
+            }
+
+            let message = `*NEW ORDER REQUEST*\n`;
+            message += `------------------------\n`;
+            message += `*Customer:* ${name}\n`;
+            message += `*Phone:* ${phone}\n`;
+            message += `*Type:* ${fulfillmentType.toUpperCase()}\n`;
+
+            if (fulfillmentType === 'delivery') {
+                message += `*Address:* ${address}\n`;
+            }
+
+            message += `------------------------\n`;
+            message += `*ITEMS ORDERED:*\n`;
+
             Object.keys(cart).forEach(id => {
                 const prod = products.find(p => p.id == id);
                 if (prod) {
                     const unitText = prod.category === 'tea' ? 'People' : 'Pcs';
-                    itemsList += `• ${prod.name} x ${cart[id]} ${unitText} = ₹${prod.price * cart[id]}\n`;
+                    message += `• ${prod.name} (${prod.size}) x ${cart[id]} ${unitText}\n`;
                 }
             });
 
-            const text = `*NEW ONLINE ORDER - ALLAM CHAI (KEESARA)*\n` +
-                         `-----------------------------------\n` +
-                         `*Fulfillment:* ${selectedFulfillment}\n` +
-                         `*Customer Name:* ${name}\n` +
-                         `*Phone:* ${phone}\n` +
-                         (selectedFulfillment === 'Delivery' ? `*Address:* ${address}\n` : `*Location:* Keesara Counter Pickup\n`) +
-                         `-----------------------------------\n` +
-                         `*Items Ordered:*\n${itemsList}` +
-                         `-----------------------------------\n` +
-                         `*Grand Total:* ₹${total}\n` +
-                         `*Payment:* PhonePe UPI (${PHONEPE_UPI_ID})`;
+            message += `------------------------\n`;
+            message += `Please confirm order availability and total amount.`;
 
-            window.pendingWhatsAppUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
-
-            const phonePeUri = `upi://pay?pa=${PHONEPE_UPI_ID}&pn=AllamChai&am=${total}&cu=INR`;
-            window.location.href = phonePeUri;
-
-            const form = document.getElementById('order-form');
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            submitBtn.className = "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg transition mt-2 flex items-center justify-center gap-2";
-            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp text-sm"></i> Payment Done? Send WhatsApp Notification`;
-            
-            form.onsubmit = function(evt) {
-                evt.preventDefault();
-                if (window.pendingWhatsAppUrl) {
-                    window.open(window.pendingWhatsAppUrl, '_blank');
-                }
-            };
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodedMessage}`, '_blank');
         }
 
-        function submitPartyOrder() {
-            const name = document.getElementById('party-name').value;
-            const phone = document.getElementById('party-phone').value;
+        function dispatchPartyInquiry() {
+            const name = document.getElementById('party-name').value.trim();
+            const phone = document.getElementById('party-phone').value.trim();
             const date = document.getElementById('party-date').value;
-            const guests = document.getElementById('party-guests').value;
+            const details = document.getElementById('party-details').value.trim();
 
             if (!name || !phone) {
-                alert('Please provide your name and contact phone number.');
+                alert('Please enter your name and phone number for party inquiry.');
                 return;
             }
 
-            const text = `*BULK / PARTY CATERING INQUIRY (KEESARA)*\n` +
-                         `-----------------------------------\n` +
-                         `*Name:* ${name}\n` +
-                         `*Phone:* ${phone}\n` +
-                         `*Event Date:* ${date || 'Not specified'}\n` +
-                         `*Guest Count / Requirements:* ${guests || 'General inquiry'}`;
+            let message = `*BULK & PARTY CATERING INQUIRY*\n`;
+            message += `------------------------\n`;
+            message += `*Name:* ${name}\n`;
+            message += `*Phone:* ${phone}\n`;
+            if (date) message += `*Event Date:* ${date}\n`;
+            if (details) message += `*Details/Guests:* ${details}\n`;
+            message += `------------------------\n`;
+            message += `Please contact me with bulk delivery and catering options.`;
 
-            const waUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(text)}`;
-            window.open(waUrl, '_blank');
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodedMessage}`, '_blank');
         }
-
-        document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
     </script>
 </body>
 </html>
