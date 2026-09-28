@@ -45,5 +45,4 @@ The store manages 23 daily items categorized across:
 ---
 
 ## 📄 License
-
-This project is open-source under the [MIT License](LICENSE).
+All Rights Reserved
