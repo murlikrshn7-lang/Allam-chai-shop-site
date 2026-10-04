@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allam Chai - 30+ Years h</title>
+    <title>Allam Chai – Fresh Tea & Dairy in Keesara</title>
+    <meta name="description" content="Allam Chai, Keesara: 30+ years of fresh ginger tea, Heritage dairy and cold beverages. Order for store pickup or delivery on WhatsApp.">
+    <meta name="theme-color" content="#5c2406">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Allam Chai">
+    <meta property="og:title" content="Allam Chai – Fresh Tea & Dairy in Keesara">
+    <meta property="og:description" content="Fresh allam chai, Heritage dairy & cold drinks. Order on WhatsApp for pickup or delivery. Open daily 4 AM – 9 PM.">
+    <meta property="og:url" content="https://allam-chai-shop-site.vercel.app/">
+    <meta property="og:image" content="https://allam-chai-shop-site.vercel.app/1.png">
+    <meta name="twitter:card" content="summary_large_image">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.441.0"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-24">
 
@@ -20,7 +29,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-tight">Allam Chai</h1>
-                    <p class="text-xs text-amber-200">30+ Years • Serving Fresh Brews & Pure Dairy</p>
+                    <p class="text-xs text-amber-200">Keesara Branch • Serving Fresh Brews & Pure Dairy</p>
                 </div>
             </div>
             <a href="#party-section" class="bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold px-3 py-1.5 rounded-full text-xs shadow transition flex items-center gap-1">
@@ -35,6 +44,7 @@
             <span class="inline-block bg-[#b85b00] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider mb-1">
                 Premium Quality Guaranteed
             </span>
+            <div id="open-status" class="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-amber-100/90 mb-1" aria-live="polite"></div>
             <p class="text-xs text-amber-100/90 leading-relaxed">
                 Authentic Allam Chai, fresh Heritage dairy, and chilled beverages delivered instantly in Keesara or available for quick store pickup.
             </p>
@@ -57,7 +67,8 @@
                 <span>🍵 Tea Options</span>
             </h3>
             <div id="tea-grid" class="space-y-3">
-                <p class="text-xs text-slate-400 italic">Loading menu...</p>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <noscript><p class="text-xs text-slate-500">Please enable JavaScript to see the menu, or call +91 96762 22557 to order.</p></noscript>
             </div>
         </section>
 
@@ -67,7 +78,10 @@
                 <span>🥤 Cold Beverages</span>
             </h3>
             <div id="beverages-grid" class="space-y-3">
-                <p class="text-xs text-slate-400 italic">Loading menu...</p>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <noscript><p class="text-xs text-slate-500">Please enable JavaScript to see the menu, or call +91 96762 22557 to order.</p></noscript>
             </div>
         </section>
 
@@ -77,7 +91,9 @@
                 <span>🥛 Dairy Essentials</span>
             </h3>
             <div id="dairy-grid" class="space-y-3">
-                <p class="text-xs text-slate-400 italic">Loading menu...</p>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <div class="skeleton h-[88px] rounded-2xl bg-slate-200 animate-pulse"></div>
+                <noscript><p class="text-xs text-slate-500">Please enable JavaScript to see the menu, or call +91 96762 22557 to order.</p></noscript>
             </div>
         </section>
 
@@ -124,7 +140,7 @@
 
                 <div class="flex items-center gap-3">
                     <i data-lucide="clock" class="w-4 h-4 text-amber-500 shrink-0"></i>
-                    <p class="text-xs text-slate-300">Open Daily: <span class="font-semibold text-white">4.00 AM – 9.00 PM</span></p>
+                    <p class="text-xs text-slate-300">Open Daily: <span class="font-semibold text-white">4.00 AM – 9.00 PM</span> <span id="open-status-footer" class="ml-1 text-[10px] font-bold"></span></p>
                 </div>
 
                 <div class="flex items-center gap-3">
@@ -204,6 +220,9 @@
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Phone Number</label>
                     <input type="tel" id="cust-phone" placeholder="Enter mobile number" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-800">
                 </div>
+                <p id="delivery-note" class="hidden text-[11px] text-amber-900 bg-amber-50 border border-amber-200 rounded-xl p-2.5 leading-relaxed">
+                    🛵 Delivery is within Keesara. We'll confirm your delivery area, charges and timing on WhatsApp before dispatch.
+                </p>
                 <div id="address-container" class="hidden">
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Delivery Address</label>
                     <textarea id="cust-address" placeholder="Enter street / landmark address" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-800" rows="2"></textarea>
@@ -227,25 +246,25 @@
             { id: "1", category: "beverages", name: "Kinley Water Bottle", size: "1 Litre", minQty: 1, status: "available", img: "./Kinley.avif" },
             { id: "2", category: "beverages", name: "Bisleri Water Bottle", size: "1 Litre", minQty: 1, status: "available", img: "./bislery.avif" },
             { id: "3", category: "beverages", name: "Kinley Strong Soda", size: "250ml", minQty: 1, status: "available", img: "./Kinley Strong Soda.avif" },
-            { id: "4", category: "beverages", name: "Thums up", size: "250ml", minQty: 1, status: "available", img: "./Thumps up.avif" },
-            { id: "5", category: "beverages", name: "Sprite", size: "250ml", minQty: 1, status: "available", img: "./Sprite.avif" },
-            { id: "6", category: "beverages", name: "Pulpy Orage", size: "250ml", minQty: 1, status: "available", img: "./pulpy Oragne.avif" },
-            { id: "7", category: "beverages", name: "Maaza Mango Drink", size: "250ml", minQty: 1, status: "available", img: "./Maaza.avif" },
-            { id: "8", category: "beverages", name: "Appy Fizz Sparkling Drink", size: "250ml", minQty: 1, status: "available", img: "./Appy Fizz.avif" },
-            { id: "9", category: "beverages", name: "Maaza Mango Drink", size: "600ml", minQty: 1, status: "available", img: "./Maaza.avif" },
-            { id: "10", category: "beverages", name: "Godrej Jersey Badam Milk", size: "200 ml", minQty: 1, status: "available", img: "./Jersey Badam.avif" },
-            { id: "11", category: "beverages", name: "Thums up", size: "1 Litre", minQty: 1, status: "available", img: "./Thumps up.avif" },
-            { id: "12", category: "beverages", name: "Sprite", size: "1 Litre", minQty: 1, status: "available", img: "./Sprite.avif" },
-            { id: "13", category: "beverages", name: "Kinley Strong Soda", size: "500ml", minQty: 1, status: "available", img: "Kinley Strong Soda.avif" },
+            { id: "4", category: "beverages", name: "Thums up", size: "250ml", minQty: 1, status: "available", img: "./Thums up.avif" },
+            { id: "5", category: "beverages", name: "Sprite", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "6", category: "beverages", name: "Pulpy Orange", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "7", category: "beverages", name: "Maaza Mango Drink", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "8", category: "beverages", name: "Appy Fizz Sparkling Drink", size: "250ml", minQty: 1, status: "available", img: "" },
+            { id: "9", category: "beverages", name: "Maaza Mango Drink", size: "600ml", minQty: 1, status: "available", img: "" },
+            { id: "10", category: "beverages", name: "Godrej Jersey Badam Milk", size: "200 ml", minQty: 1, status: "available", img: "" },
+            { id: "11", category: "beverages", name: "Thums up", size: "1 Litre", minQty: 1, status: "available", img: "" },
+            { id: "12", category: "beverages", name: "Sprite", size: "1 Litre", minQty: 1, status: "available", img: "" },
+            { id: "13", category: "beverages", name: "Kinley Strong Soda", size: "500ml", minQty: 1, status: "available", img: "" },
             { id: "14", category: "beverages", name: "Sting", size: "200ml", minQty: 1, status: "available", img: "" },
-            { id: "15", category: "beverages", name: "Thums up", size: "2 Litre", minQty: 1, status: "available", img: "./Thumps up.avif" },
-            { id: "16", category: "beverages", name: "Sprite", size: "2 Litre", minQty: 1, status: "available", img: "./Sprite.avif" },
-            { id: "17", category: "beverages", name: "Pulpy Orage", size: "2 Litre", minQty: 1, status: "available", img: "./pulpy Oragne.avif" },
-            { id: "18", category: "beverages", name: "Maaza Mango Drink", size: "2 Litre", minQty: 1, status: "available", img: "./Maaza.avif" },
-            { id: "19", category: "beverages", name: "Mountain Dew", size: "500ml", minQty: 1, status: "available", img: "./Mountain Dew.avif" },
-            { id: "20", category: "dairy", name: "Heritage Total Curd Container", size: "1 kg", minQty: 1, status: "available", img: "./Heritage total curd.avif" },
-            { id: "21", category: "dairy", name: "Heritage Premium Salted Butter", size: "500g", minQty: 1, status: "available", img: "./Heritage Butter.avif" },
-            { id: "22", category: "dairy", name: "Heritage Fresh Paneer", size: "200g", minQty: 1, status: "available", img: "./Heritage Paneer.avif" },
+            { id: "15", category: "beverages", name: "Thums up", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "16", category: "beverages", name: "Sprite", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "17", category: "beverages", name: "Pulpy Orange", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "18", category: "beverages", name: "Maaza Mango Drink", size: "2 Litre", minQty: 1, status: "available", img: "" },
+            { id: "19", category: "beverages", name: "Mountain Dew", size: "500ml", minQty: 1, status: "available", img: "" },
+            { id: "20", category: "dairy", name: "Heritage Total Curd Container", size: "1 kg", minQty: 1, status: "available", img: "" },
+            { id: "21", category: "dairy", name: "Heritage Premium Salted Butter", size: "500g", minQty: 1, status: "available", img: "" },
+            { id: "22", category: "dairy", name: "Heritage Fresh Paneer", size: "200g", minQty: 1, status: "available", img: "" },
             { id: "23", category: "dairy", name: "Heritage Total Curd", size: "500g", minQty: 1, status: "available", img: "" }
         ];
 
@@ -254,9 +273,28 @@
         let fulfillmentType = 'pickup';
 
         document.addEventListener("DOMContentLoaded", () => {
-            lucide.createIcons();
+            // Render the menu first so a failed icon CDN can never leave it empty
             renderMenu();
+            updateOpenStatus();
+            setInterval(updateOpenStatus, 60000);
+            try { if (window.lucide) lucide.createIcons(); } catch (e) { console.warn('Icons unavailable', e); }
         });
+
+        // Store hours: 4:00 AM – 9:00 PM IST daily
+        function updateOpenStatus() {
+            const OPEN_MIN = 4 * 60, CLOSE_MIN = 21 * 60;
+            const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+            const h = +parts.find(x => x.type === 'hour').value % 24;
+            const m = +parts.find(x => x.type === 'minute').value;
+            const now = h * 60 + m;
+            const isOpen = now >= OPEN_MIN && now < CLOSE_MIN;
+            const dot = isOpen ? 'bg-emerald-400' : 'bg-red-400';
+            const label = isOpen ? 'Open now · closes 9 PM' : 'Closed now · opens 4 AM';
+            const el = document.getElementById('open-status');
+            if (el) el.innerHTML = `<span class="inline-block w-2 h-2 rounded-full ${dot}"></span><span>${label}</span>`;
+            const f = document.getElementById('open-status-footer');
+            if (f) { f.textContent = isOpen ? '● Open now' : '● Closed now'; f.className = 'ml-1 text-[10px] font-bold ' + (isOpen ? 'text-emerald-400' : 'text-red-400'); }
+        }
 
         function renderMenu() {
             const teaGrid = document.getElementById('tea-grid');
@@ -342,10 +380,12 @@
                 btnPickup.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-amber-800 bg-amber-50 text-amber-900";
                 btnDelivery.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-slate-200 bg-white text-slate-600";
                 addrContainer.classList.add('hidden');
+                document.getElementById('delivery-note').classList.add('hidden');
             } else {
                 btnDelivery.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-amber-800 bg-amber-50 text-amber-900";
                 btnPickup.className = "py-2.5 rounded-xl border-2 font-bold text-xs flex items-center justify-center gap-1 border-slate-200 bg-white text-slate-600";
                 addrContainer.classList.remove('hidden');
+                document.getElementById('delivery-note').classList.remove('hidden');
             }
         }
 
