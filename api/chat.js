@@ -47,6 +47,60 @@ function limited(ip) {
   return list.length > RATE_LIMIT;
 }
 
+const API = "https://generativelanguage.googleapis.com/v1beta";
+
+async function callGemini(model, contents) {
+  const generationConfig = { maxOutputTokens: 400, temperature: 0.4 };
+  // 2.5 Flash models "think" by default, which can use up the token budget; switch it off
+  if (model.includes("2.5-flash")) generationConfig.thinkingConfig = { thinkingBudget: 0 };
+
+  const r = await fetch(`${API}/models/${model}:generateContent`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-goog-api-key": process.env.GEMINI_API_KEY,
+    },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents,
+      generationConfig,
+    }),
+  });
+
+  if (!r.ok) {
+    const text = await r.text();
+    console.error(`Gemini error: model=${model} status=${r.status} body=${text.slice(0, 400)}`);
+    return { status: r.status, reply: "" };
+  }
+
+  const data = await r.json();
+  const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+  return { status: 200, reply: parts.map((p) => p.text || "").join("").trim() };
+}
+
+// Ask Google which models this key can actually use, and pick a Flash model
+async function discoverModel() {
+  try {
+    const r = await fetch(`${API}/models?pageSize=200`, {
+      headers: { "x-goog-api-key": process.env.GEMINI_API_KEY },
+    });
+    if (!r.ok) {
+      console.error(`Gemini list models failed: status=${r.status} body=${(await r.text()).slice(0, 300)}`);
+      return null;
+    }
+    const data = await r.json();
+    const usable = (data.models || [])
+      .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
+      .map((m) => m.name.replace("models/", ""))
+      .filter((n) => n.includes("flash") && !/image|tts|live|audio|thinking|preview|exp/.test(n));
+    console.error("Gemini usable flash models: " + usable.join(", "));
+    return usable.find((n) => n.includes("lite")) || usable[0] || null;
+  } catch (e) {
+    console.error("Gemini discover failed", e);
+    return null;
+  }
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -89,37 +143,20 @@ module.exports = async (req, res) => {
     let lastStatus = 0;
 
     for (const model of MODELS) {
-      const generationConfig = { maxOutputTokens: 400, temperature: 0.4 };
-      // 2.5 Flash models "think" by default, which can use up the token budget; switch it off
-      if (model.includes("2.5-flash")) generationConfig.thinkingConfig = { thinkingBudget: 0 };
+      const out = await callGemini(model, contents);
+      lastStatus = out.status;
+      reply = out.reply;
+      if (out.status !== 404) break; // 404 = model not available to this key: try the next one
+    }
 
-      const r = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "x-goog-api-key": process.env.GEMINI_API_KEY,
-          },
-          body: JSON.stringify({
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-            contents,
-            generationConfig,
-          }),
-        }
-      );
-
-      lastStatus = r.status;
-      if (r.status === 404) continue; // model not available: try the next one
-      if (!r.ok) {
-        console.error("Gemini API error", model, r.status, await r.text());
-        break;
+    // Every listed model was missing: ask Google which models this key can use
+    if (!reply && lastStatus === 404) {
+      const found = await discoverModel();
+      if (found && !MODELS.includes(found)) {
+        const out = await callGemini(found, contents);
+        lastStatus = out.status;
+        reply = out.reply;
       }
-
-      const data = await r.json();
-      const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
-      reply = parts.map((p) => p.text || "").join("").trim();
-      break;
     }
 
     if (!reply && lastStatus === 429) {
