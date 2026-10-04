@@ -237,6 +237,40 @@
         </div>
     </div>
 
+
+    <!-- AI Chat Widget -->
+    <button id="chat-fab" type="button" onclick="toggleChat()" aria-label="Chat with Allam Chai assistant" aria-expanded="false" aria-controls="chat-panel"
+        class="fixed right-4 bottom-24 z-40 w-14 h-14 rounded-full bg-[#5c2406] text-amber-200 shadow-xl border-2 border-amber-500 flex items-center justify-center hover:bg-amber-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 transition">
+        <svg id="chat-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <svg id="chat-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <section id="chat-panel" role="dialog" aria-label="Allam Chai assistant" class="hidden fixed z-40 right-4 left-4 sm:left-auto sm:w-[22rem] bottom-44 h-[min(28rem,calc(100vh-14rem))] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
+        <div class="bg-[#5c2406] text-white px-4 py-3 flex items-center justify-between">
+            <div>
+                <p class="font-bold text-sm">Allam Chai assistant</p>
+                <p class="text-[11px] text-amber-200">Ask about menu, timings or orders</p>
+            </div>
+            <button type="button" onclick="toggleChat()" class="text-amber-200 hover:text-white text-xl leading-none px-1" aria-label="Close chat">&times;</button>
+        </div>
+
+        <div id="chat-log" class="flex-1 overflow-y-auto p-3 space-y-2 bg-slate-50 text-xs" aria-live="polite"></div>
+
+        <div id="chat-chips" class="px-3 pt-2 pb-1 flex gap-1.5 overflow-x-auto bg-slate-50 border-t border-slate-100">
+            <button type="button" class="chat-chip whitespace-nowrap text-[11px] font-semibold px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">What's on the menu?</button>
+            <button type="button" class="chat-chip whitespace-nowrap text-[11px] font-semibold px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">Opening hours</button>
+            <button type="button" class="chat-chip whitespace-nowrap text-[11px] font-semibold px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">Do you deliver?</button>
+            <button type="button" class="chat-chip whitespace-nowrap text-[11px] font-semibold px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">Party order</button>
+        </div>
+
+        <div class="p-3 bg-slate-50 flex gap-2 items-center">
+            <input id="chat-input" type="text" maxlength="500" placeholder="Type your question..." autocomplete="off"
+                class="flex-1 text-xs p-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-amber-800">
+            <button id="chat-send" type="button" onclick="sendChat()" class="bg-[#5c2406] hover:bg-amber-950 text-white font-bold text-xs px-4 py-3 rounded-xl disabled:opacity-50">Send</button>
+        </div>
+        <p class="px-3 pb-2 bg-slate-50 text-[10px] text-slate-400 leading-snug">Please don't share personal details here. To order, use the + buttons or WhatsApp.</p>
+    </section>
+
     <!-- Application Script -->
     <script>
         const STORE_WHATSAPP = "919676222557";
@@ -485,6 +519,84 @@
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodedMessage}`, '_blank');
         }
+
+        // ---------- AI chat widget ----------
+        const chatHistory = [];
+        let chatBusy = false;
+        const CHAT_GREETING = "Hi! I can help with our menu, timings, delivery and party orders. What would you like to know?";
+
+        function chatBubble(text, who) {
+            const log = document.getElementById('chat-log');
+            const div = document.createElement('div');
+            div.className = who === 'user' ? 'flex justify-end' : 'flex justify-start';
+            const b = document.createElement('div');
+            b.className = (who === 'user'
+                ? 'bg-[#5c2406] text-white rounded-2xl rounded-br-sm'
+                : 'bg-white text-slate-800 border border-slate-200 rounded-2xl rounded-bl-sm') + ' px-3 py-2 max-w-[85%] leading-relaxed whitespace-pre-wrap break-words';
+            b.textContent = text;   // textContent: never inject model output as HTML
+            div.appendChild(b);
+            log.appendChild(div);
+            log.scrollTop = log.scrollHeight;
+            return div;
+        }
+
+        function toggleChat() {
+            const panel = document.getElementById('chat-panel');
+            const fab = document.getElementById('chat-fab');
+            const opening = panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', !opening);
+            fab.setAttribute('aria-expanded', String(opening));
+            document.getElementById('chat-icon-open').classList.toggle('hidden', opening);
+            document.getElementById('chat-icon-close').classList.toggle('hidden', !opening);
+            if (opening) {
+                if (!document.getElementById('chat-log').children.length) chatBubble(CHAT_GREETING, 'bot');
+                document.getElementById('chat-input').focus();
+            }
+        }
+
+        async function sendChat(preset) {
+            if (chatBusy) return;
+            const input = document.getElementById('chat-input');
+            const text = (preset || input.value).trim();
+            if (!text) return;
+            input.value = '';
+            document.getElementById('chat-chips').classList.add('hidden');
+
+            chatBubble(text, 'user');
+            chatHistory.push({ role: 'user', content: text });
+
+            chatBusy = true;
+            document.getElementById('chat-send').disabled = true;
+            const typing = chatBubble('Typing...', 'bot');
+
+            try {
+                const r = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: chatHistory })
+                });
+                const data = await r.json().catch(() => ({}));
+                if (!r.ok || !data.reply) throw new Error(data.error || 'Request failed');
+                typing.remove();
+                chatBubble(data.reply, 'bot');
+                chatHistory.push({ role: 'assistant', content: data.reply });
+            } catch (e) {
+                typing.remove();
+                chatHistory.pop(); // drop the unanswered question so the history stays valid
+                chatBubble("Sorry, I can't answer right now. Please call or WhatsApp us on +91 96762 22557.", 'bot');
+            } finally {
+                chatBusy = false;
+                document.getElementById('chat-send').disabled = false;
+                input.focus();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('chat-input').addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
+            });
+            document.querySelectorAll('.chat-chip').forEach(c => c.addEventListener('click', () => sendChat(c.textContent)));
+        });
     </script>
 </body>
 </html>
